@@ -1,0 +1,56 @@
+# Core LangChain e extensões
+langchain
+langchain-community
+langchain-ollama
+langchain-openai
+langchain-huggingface
+
+# LLMs locais
+torch  # Usado por transformers e modelos locais
+
+# Processamento de texto e PDF
+unstructured
+PyPDF2
+pdfminer.six
+python-docx
+openpyxl
+xlrd
+
+# Infraestrutura
+faiss-cpu
+tqdm
+pydantic
+python-dotenv
+tiktoken
+
+# Interface web
+streamlit
+
+# Desenvolvimento e testes
+pytest
+
+
+
+
+#langchain
+#langchain-core
+#langchain-community
+#langchain-huggingface
+#streamlit
+#tqdm
+#pydantic
+#python-dotenv
+#unstructured
+#pdfminer.six
+#faiss-cpu
+#python-docx
+#pytest
+#tiktoken
+##llama-cpp-python
+#langchain_ollama 
+#langchain_openai 
+#langchain-ollama
+#openpyxl
+#xlrd
+#torch
+#PyPDF2

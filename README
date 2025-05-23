@@ -1,0 +1,72 @@
+ollama pull mistral
+ollama run mistral
+
+ ollama run llama3
+streamlit run .\app.py
+
+docker-compose down
+d
+
+
+
+
+✅ 1. Streamlit (sua aplicação RAG)
+URL: http://localhost:8501
+
+É aqui que você acessa a interface web para fazer perguntas com base nos documentos.
+
+✅ 2. Ollama (servidor da LLM)
+API: http://localhost:11434
+
+curl http://localhost:11434/api/tags
+
+curl http://localhost:11434/api/generate -H "Content-Type: application/json" -d '{"model":"llama3.2", "prompt":"Jeaner é feliz?"}'
+curl.exe http://localhost:11434/api/generate -H "Content-Type: application/json" -d "{\"model\":\"llama3.2\",\"prompt\":\"Jeaner é feliz?\"}"
+
+
+curl http://localhost:11434/api/generate -d '{"model":"llama3.2","prompt":"Jeaner é feliz?"}'
+
+
+ $env:PYTHONPATH="."; pytest
+
+Esse é o endpoint onde a aplicação se comunica com o modelo Mistral via HTTP.
+
+
+Helm
+winget install Helm.Helm
+helm install ppa-chatbot ./charts/ppa-chatbot
+helm upgrade --install ppa-chatbot ./charts/ppa-chatbot
+
+
+pytest tests/
+
+git floe feature start feature1
+git flow feature finish feature1
+
+git flow release start v1.0.0
+git flow release finish 'v1.0.0'
+git push origin develop
+git push origin main
+
+#git rm -r --cached __pycache__
+
+
+Programa: [nome do programa]
+
+Objetivo Geral:
+- [texto objetivo geral 1]
+- [texto objetivo geral 2]
+
+Objetivos Específicos:
+- [texto objetivo específico 1]
+- [texto objetivo específico 2]
+
+Indicadores:
+- [indicador 1] – [meta 1]
+- [indicador 2] – [meta 2]
+
+
+Objetivos Específicos:
+- Promover a formação de estoques de alimentos, contribuindo para a sustentação de preços aos produtores(as) e ampliando a oferta de produtos básicos no mercado interno.
+- Promover a comercialização e as compras públicas da agricultura familiar, assegurando a participação de povos e comunidades tradicionais, povos indígenas, juventude rural e mulheres rurais.
+- Fortalecer a capacidade produtiva da Agricultura Familiar para o abastecimento, por meio da promoção de empreendimentos familiares, associativismo e cooperativismo solidários, agroindustrialização e inclusão sanitária, assegurando a participação de povos
