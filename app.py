@@ -10,7 +10,8 @@ from rag.qa_chain import build_qa_chain
 from rag.utils import save_uploaded_files, load_indexed_files
 from rag.llm_loader import load_llm
 from rag.chat_history import generate_session_id, save_chat
-from rag.prompt import get_saved_prompt, save_prompt
+from rag.prompt import get_saved_prompts, save_prompt, get_prompt
+
 
 # Configuração de logging
 logging.basicConfig(
@@ -43,23 +44,42 @@ if "chat_session_id" not in st.session_state:
     logging.info(f"Sessão iniciada: {st.session_state.chat_session_id}")
 
 # Prompt personalizado
-st.subheader("🛠️ Prompt personalizado")
-if "prompt_template" not in st.session_state:
-    st.session_state["prompt_template"] = get_saved_prompt()
-    logging.info("Prompt personalizado carregado.")
+st.subheader("🛠️ Prompts personalizados")
+prompt_text = get_prompt("teste")
+
+
+prompts = get_saved_prompts()
+prompt_names = list(prompts.keys()) or ["default"]
+
+prompt_selecionado = st.selectbox("Escolha um prompt para editar ou criar:", prompt_names + ["<novo>"], key="prompt_selector")
+
+if prompt_selecionado == "<novo>":
+    novo_nome = st.text_input("Nome do novo prompt:", key="novo_nome_prompt")
+    prompt_conteudo = ""
+else:
+    novo_nome = prompt_selecionado
+    prompt_conteudo = prompts.get(prompt_selecionado, "")
 
 edited_prompt = st.text_area(
-    "Edite o template do prompt abaixo (use {context} e {question}):",
-    value=st.session_state["prompt_template"],
+    "Conteúdo do prompt (use {context} e {question}):",
+    value=prompt_conteudo,
     height=400,
     key="prompt_editor"
 )
 
-if st.button("📏 Salvar prompt"):
-    save_prompt(edited_prompt)
-    st.session_state["prompt_template"] = edited_prompt
-    st.success("Prompt salvo com sucesso!")
-    logging.info("Prompt personalizado salvo.")
+if st.button("💾 Salvar prompt"):
+    if novo_nome.strip() == "":
+        st.warning("Nome do prompt não pode estar vazio.")
+    else:
+        save_prompt(novo_nome.strip(), edited_prompt)
+        st.session_state["prompt_template"] = edited_prompt
+        st.session_state["prompt_name"] = novo_nome
+        st.success(f"Prompt '{novo_nome}' salvo com sucesso!")
+        st.rerun()
+
+# Atualiza para uso no QA
+st.session_state["prompt_template"] = edited_prompt
+
 
 # Sidebar: Configurações
 st.sidebar.markdown("⚙️ **Configurações**")
@@ -150,7 +170,9 @@ if not vectorstore:
     st.stop()
 
 llm = load_llm(modelo_llm)
-qa_chain = build_qa_chain(vectorstore, llm, st.session_state["prompt_template"])
+#qa_chain = build_qa_chain(vectorstore, llm, st.session_state["prompt_template"])
+qa_chain = build_qa_chain(vectorstore, llm, st.session_state.get("prompt_name", "teste"))
+
 if not qa_chain:
     st.warning("⚠️ A chain não está carregada.")
     logging.error("Falha ao carregar a chain.")

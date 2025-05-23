@@ -1,28 +1,28 @@
-# qa_chain.py
+# rag/qa_chain.py
 
-import logging
 from langchain.chains import RetrievalQA
-from rag.prompt import get_custom_prompt
-from settings import RETRIEVER_TOP_K
+from langchain.prompts import PromptTemplate
+from rag.prompt import get_prompt
 
-def build_qa_chain(vectorstore, llm, prompt_template):
-    from rag.prompt import get_custom_prompt
-    from settings import RETRIEVER_TOP_K
+def build_qa_chain(vectorstore, llm, prompt_template_name="teste"):
+    """Constrói a QA chain com o prompt nomeado no prompt_templates.json."""
 
-    if not vectorstore or not llm:
-        logging.error("Vectorstore ou LLM nulo ao tentar construir a QA Chain.")
-        return None
+    prompt_text = get_prompt(prompt_template_name)
 
-    logging.info("Construindo cadeia de pergunta e resposta com o modelo selecionado.")
-    retriever = vectorstore.as_retriever(search_type="mmr", k=RETRIEVER_TOP_K, fetch_k=30)
-    prompt = get_custom_prompt(prompt_template)
+    if not prompt_text:
+        raise ValueError(f"❌ Prompt '{prompt_template_name}' não encontrado.")
+
+    prompt = PromptTemplate(
+        input_variables=["context", "question"],
+        template=prompt_text
+    )
 
     chain = RetrievalQA.from_chain_type(
         llm=llm,
-        retriever=retriever,
-        return_source_documents=True,
-        chain_type_kwargs={"prompt": prompt}
+        retriever=vectorstore.as_retriever(),
+        chain_type="stuff",
+        chain_type_kwargs={"prompt": prompt},
+        return_source_documents=True
     )
 
-    logging.info("QA Chain construída com sucesso.")
     return chain
