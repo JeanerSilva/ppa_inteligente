@@ -25,9 +25,11 @@ def build_qa_chain(vectorstore, llm, prompt_template_name="teste"):
         template=prompt_text
     )
 
+    retriever = vectorstore.as_retriever(search_kwargs={"k": st.session_state["retriever_k"]})
+
     chain = RetrievalQA.from_chain_type(
         llm=llm,
-        retriever=vectorstore.as_retriever(),
+        retriever=retriever,
         chain_type="stuff",
         chain_type_kwargs={"prompt": prompt},
         return_source_documents=True

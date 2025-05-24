@@ -19,8 +19,11 @@ def process_query(user_input, qa_chain):
     resposta = result["result"]
     fontes = result["source_documents"]
 
+    if st.session_state.get("usar_reranker_debug", False):
     # Aplicar rerank com modelo local
-    fontes = rerank_local_reranker(user_input, fontes, top_k=st.session_state["retriever_k"])
+        fontes = rerank_local_reranker(user_input, fontes, top_k=st.session_state["retriever_k"])
+    else:
+        fontes = result["source_documents"]
 
 
     elapsed = time.time() - start
@@ -46,4 +49,19 @@ def process_query(user_input, qa_chain):
         metadata=chat_metadata
     )
 
+    # DEBUG: Comparar fontes antes e depois do rerank
+    if st.session_state.get("usar_reranker_debug", False):
+        st.subheader("🔍 Comparação: Chunks Antes vs. Depois do Rerank")
+
+        st.markdown("### Antes do Reranker")
+        for i, doc in enumerate(result["source_documents"]):
+            st.markdown(f"**[{i+1}]** {doc.page_content[:300]}...")
+
+        st.markdown("### Depois do Reranker")
+        for i, doc in enumerate(fontes):
+            st.markdown(f"**[{i+1}]** {doc.page_content[:300]}...")
+
+
     return resposta, fontes, elapsed
+
+

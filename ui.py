@@ -12,6 +12,7 @@ from rag.prompt import get_saved_prompts, save_prompt
 from logic import process_query
 from handlers.file_handler import handle_upload_and_reindex, display_indexed_files
 
+
 def render_interface():
     render_header()
     render_prompt_editor()
@@ -156,3 +157,4 @@ def render_chat():
             if role == "bot":
                 st.download_button("📅 Baixar última resposta", msg, file_name="resposta.txt")
                 break
+

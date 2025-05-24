@@ -6,9 +6,16 @@ from rag.chat_history import generate_session_id
 from rag.utils import load_indexed_files
 
 def setup_app():
+
+    st.set_page_config(page_title="PPA Inteligente", page_icon="🧐")
+    # Opcional: debug para comparar chunks antes e depois do rerank
+    st.sidebar.markdown("🧪 **Debug de Reranker**")
+    st.sidebar.checkbox("🔬 Mostrar comparação do reranker", value=False, key="usar_reranker_debug")
+
     log_path = "ppa.log"
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
+    logging.info("✅ Aplicativo iniciado.")
 
     # Evita adicionar múltiplos handlers ao recarregar
     if not any(isinstance(h, logging.FileHandler) and h.baseFilename.endswith("ppa.log") for h in logger.handlers):
@@ -20,9 +27,6 @@ def setup_app():
     print(f"📂 Logging para: {log_path}")
     logger.info("✅ Aplicativo iniciado.")
 
-
-    st.set_page_config(page_title="PPA Inteligente", page_icon="🧐")
-    logging.info("✅ Aplicativo iniciado.")
 
     if "indexed_files" not in st.session_state:
         st.session_state["indexed_files"] = load_indexed_files()
