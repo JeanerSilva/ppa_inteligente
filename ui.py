@@ -56,7 +56,7 @@ def render_prompt_editor():
             st.session_state["prompt_template"] = edited_prompt
             st.session_state["prompt_name"] = novo_nome
             st.success(f"Prompt '{novo_nome}' salvo com sucesso!")
-            st.rerun()
+            #st.rerun()
 
     st.session_state["prompt_template"] = edited_prompt
 

@@ -3,6 +3,14 @@
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from rag.prompt import get_prompt
+import streamlit as st
+
+from rag.reranker_local import LocalReranker
+
+def rerank_documents(query, docs):
+    reranker = LocalReranker()
+    return reranker.rerank(query, docs, top_k=st.session_state["retriever_k"])
+
 
 def build_qa_chain(vectorstore, llm, prompt_template_name="teste"):
     """Constrói a QA chain com o prompt nomeado no prompt_templates.json."""
