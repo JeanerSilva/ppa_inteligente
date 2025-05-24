@@ -67,7 +67,7 @@ def render_sidebar():
 
      # Sidebar: k (quantidade de trechos)
     st.sidebar.markdown("📑 **Número de trechos (k)**")
-    st.sidebar.markdown("🔍 1 = Mais específico | 20 = Mais genérico")
+    st.sidebar.markdown("🔍 1 = Mais específico | 20 = Mais abrangente")
     st.session_state["retriever_k"] = st.sidebar.slider(
         label="Número de trechos a considerar:",
         min_value=1,

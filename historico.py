@@ -1,6 +1,7 @@
 import os
 import json
 import streamlit as st
+import codecs
 
 st.set_page_config(page_title="Histórico de Sessões", page_icon="📜")
 st.title("📜 Histórico de Sessões de Chat")
@@ -20,14 +21,16 @@ for nome in arquivos:
     if nome.endswith(".json"):
         with open(os.path.join(SESSIONS_DIR, nome), encoding="utf-8") as f:
             try:
-                dados.append(json.load(f))
+                sessao = json.load(f)
+                if isinstance(sessao, dict):
+                    dados.append(sessao)
             except Exception:
                 continue
 
 # Filtros
 st.sidebar.header("🔎 Filtros")
-llms = sorted(set(d["metadata"].get("modelo_llm", "") for d in dados))
-embeddings = sorted(set(d["metadata"].get("modelo_embedding", "") for d in dados))
+llms = sorted(set(d.get("metadata", {}).get("modelo_llm", "") for d in dados if isinstance(d, dict)))
+embeddings = sorted(set(d.get("metadata", {}).get("modelo_embedding", "") for d in dados if isinstance(d, dict)))
 
 filtro_llm = st.sidebar.selectbox("Filtrar por modelo LLM:", ["Todos"] + llms)
 filtro_emb = st.sidebar.selectbox("Filtrar por embedding:", ["Todos"] + embeddings)
@@ -35,8 +38,9 @@ filtro_emb = st.sidebar.selectbox("Filtrar por embedding:", ["Todos"] + embeddin
 # Aplica filtros
 dados_filtrados = [
     d for d in dados
-    if (filtro_llm == "Todos" or d["metadata"].get("modelo_llm") == filtro_llm)
-    and (filtro_emb == "Todos" or d["metadata"].get("modelo_embedding") == filtro_emb)
+    if isinstance(d, dict)
+    and (filtro_llm == "Todos" or d.get("metadata", {}).get("modelo_llm") == filtro_llm)
+    and (filtro_emb == "Todos" or d.get("metadata", {}).get("modelo_embedding") == filtro_emb)
 ]
 
 # Interface principal
@@ -44,12 +48,28 @@ if not dados_filtrados:
     st.info("Nenhuma sessão corresponde aos filtros.")
 else:
     for sessao in dados_filtrados:
-        with st.expander(f"🗂️ Sessão: {sessao['session_id']} — {sessao['metadata'].get('timestamp')}"):
-            st.markdown(f"**Modelo LLM:** {sessao['metadata'].get('modelo_llm')}")
-            st.markdown(f"**Embedding:** {sessao['metadata'].get('modelo_embedding')}")
-            st.markdown(f"**Retriever K:** {sessao['metadata'].get('retriever_k')}")
+        with st.expander(f"🗂️ Sessão: {sessao.get('session_id', 'ID desconhecido')} — {sessao.get('metadata', {}).get('timestamp', 'Sem data')}"):
+            st.markdown(f"**Modelo LLM:** {sessao.get('metadata', {}).get('modelo_llm', 'N/A')}")
+            st.markdown(f"**Embedding:** {sessao.get('metadata', {}).get('modelo_embedding', 'N/A')}")
+            st.markdown(f"**Retriever K:** {sessao.get('metadata', {}).get('retriever_k', 'N/A')}")
             st.markdown("---")
-            for role, msg in sessao["chat_history"]:
+
+            for item in sessao.get("chat_history", []):
+                if isinstance(item, (list, tuple)) and len(item) == 2:
+                    role, msg = item
+                elif isinstance(item, dict) and "role" in item and "msg" in item:
+                    role = item["role"]
+                    msg = item["msg"]
+                else:
+                    continue
+
                 with st.chat_message("user" if role == "user" else "assistant"):
                     st.markdown(msg)
-            st.download_button("📥 Baixar sessão", json.dumps(sessao, indent=2, ensure_ascii=False), file_name=f"{sessao['session_id']}.json")
+
+            safe_json_str = json.dumps(sessao, indent=2, ensure_ascii=False).encode('utf-16', errors='surrogatepass').decode('utf-16')
+
+            st.download_button(
+                "📥 Baixar sessão",
+                safe_json_str,
+                file_name=f"{sessao.get('session_id', 'sessao')}.json"
+            )

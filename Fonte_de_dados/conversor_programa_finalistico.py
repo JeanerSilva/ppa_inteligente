@@ -2,8 +2,10 @@ import fitz  # PyMuPDF
 import re
 import json
 import unicodedata
+import uuid
 
 ARQUIVO_PDF = "pdf/normas/anexo-iii-programas-finalisticos.pdf"
+ARQUIVO_JSONL = "chunks/chunks_programas_finalisticos.jsonl"
 
 def normalizar(texto):
     """Remove acentos e coloca em minúsculas para comparação robusta."""
@@ -86,9 +88,9 @@ for page in doc:
 if programa_atual:
     resultados.append(programa_atual)
 
-# Exporta JSON
-with open("chunks/programas_finalisticos.json", "w", encoding="utf-8") as f_json:
-    json.dump(resultados, f_json, indent=2, ensure_ascii=False)
+## Exporta JSON
+#with open("chunks/programas_finalisticos.json", "w", encoding="utf-8") as f_json:
+#    json.dump(resultados, f_json, indent=2, ensure_ascii=False)
 
 # Exporta TXT
 #with open("pdf/programas_final.txt", "w", encoding="utf-8") as f_txt:
@@ -107,3 +109,31 @@ with open("chunks/programas_finalisticos.json", "w", encoding="utf-8") as f_json
 #        f_txt.write("\n" + "="*60 + "\n\n")
 
 print(f"✅ Extração concluída com {len(resultados)} programas.")
+
+# Converter estrutura para chunks formatados
+chunks_formatados = []
+for programa in resultados:
+    texto = f"{programa['programa']}\n\n"
+    if programa["objetivos_estrategicos"]:
+        texto += "Objetivos Estratégicos:\n" + "\n".join(programa["objetivos_estrategicos"]) + "\n\n"
+    if programa["publico_alvo"]:
+        texto += "Público Alvo:\n" + "\n".join(programa["publico_alvo"]) + "\n\n"
+    if programa["orgao_responsavel"]:
+        texto += f"Órgão Responsável: {programa['orgao_responsavel']}\n\n"
+    if programa["objetivos_especificos"]:
+        texto += "Objetivos Específicos:\n" + "\n".join(programa["objetivos_especificos"]) + "\n\n"
+
+    chunks_formatados.append({
+        "text": texto.strip(),
+        "metadata": {
+            "origem": "programas_finalisticos.pdf",
+            "chunk_id": str(uuid.uuid4())
+        }
+    })
+
+# Salvar em JSONL
+with open(ARQUIVO_JSONL, "w", encoding="utf-8") as f_out:
+    for chunk in chunks_formatados:
+        f_out.write(json.dumps(chunk, ensure_ascii=False) + "\n")
+
+print(f"✅ {len(chunks_formatados)} chunks salvos em '{ARQUIVO_JSONL}'")
