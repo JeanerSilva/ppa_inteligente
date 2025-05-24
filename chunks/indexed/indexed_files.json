@@ -1,4 +1,7 @@
 [
-  "chunks_pdf.jsonl",
-  "indexed"
+  "chunks_agendas.jsonl",
+  "chunks_guias.jsonl",
+  "chunks_normas.jsonl",
+  "indexed",
+  "programas_final.json"
 ]

@@ -63,8 +63,12 @@ def render_prompt_editor():
 def render_sidebar():
     st.sidebar.markdown("⚙️ **Configurações**")
     logging.info("Iniciando configuração da interface.")
-    st.session_state["retriever_k"] = st.sidebar.number_input(
-        label="Número de trechos a considerar (k)",
+
+     # Sidebar: k (quantidade de trechos)
+    st.sidebar.markdown("📑 **Número de trechos (k)**")
+    st.sidebar.markdown("🔍 1 = Mais específico | 20 = Mais genérico")
+    st.session_state["retriever_k"] = st.sidebar.slider(
+        label="Número de trechos a considerar:",
         min_value=1,
         max_value=20,
         value=st.session_state.get("retriever_k", RETRIEVER_TOP_K),
@@ -73,13 +77,14 @@ def render_sidebar():
 
     # Sidebar: Temperatura do modelo
     st.sidebar.markdown("🌡️ **Temperatura**")
+    st.sidebar.markdown("🧊 0.0 = Mais direto | 🔥 1.0 = Mais criativo")
     st.session_state["llm_temperature"] = st.sidebar.slider(
-    "Temperatura da resposta:",
-    min_value=0.0,
-    max_value=1.0,
-    value=st.session_state.get("llm_temperature", TEMPERATURE),
-    step=0.1
-)
+        "Temperatura da resposta:",
+        min_value=0.0,
+        max_value=1.0,
+        value=st.session_state.get("llm_temperature", TEMPERATURE),
+        step=0.1
+    )
 
 
     st.sidebar.markdown("🧠 **Modelo de linguagem**")

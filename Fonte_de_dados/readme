@@ -1,0 +1,3 @@
+python .\conversor_pdf.py pdf/agendas
+python .\conversor_pdf.py pdf/guias
+python .\conversor_pdf.py pdf/normas

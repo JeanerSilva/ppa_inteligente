@@ -6,14 +6,20 @@ from rag.chat_history import generate_session_id
 from rag.utils import load_indexed_files
 
 def setup_app():
-    log_path = "log/ppa.log"
-    logging.basicConfig(
-        level=logging.INFO,
-        filename=log_path,
-        filemode="a",
-        format="%(asctime)s [%(levelname)s] %(message)s"
-    )
+    log_path = "ppa.log"
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+
+    # Evita adicionar múltiplos handlers ao recarregar
+    if not any(isinstance(h, logging.FileHandler) and h.baseFilename.endswith("ppa.log") for h in logger.handlers):
+        file_handler = logging.FileHandler(log_path, mode="a")
+        formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s")
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+
     print(f"📂 Logging para: {log_path}")
+    logger.info("✅ Aplicativo iniciado.")
+
 
     st.set_page_config(page_title="PPA Inteligente", page_icon="🧐")
     logging.info("✅ Aplicativo iniciado.")
