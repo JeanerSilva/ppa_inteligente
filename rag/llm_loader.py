@@ -11,7 +11,7 @@ from settings import TEMPERATURE, LLM_MODEL, OPENAI_MODEL,LLM_GGUF
 load_dotenv()
 openai_key = os.getenv("OPENAI_API_KEY")
 
-def load_llm(modelo_llm: str):
+def load_llm(modelo_llm: str, temperature=0.0):
 
     assert os.path.exists(LLM_GGUF), "Modelo não encontrado!"
 

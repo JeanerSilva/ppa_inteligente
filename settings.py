@@ -1,9 +1,9 @@
 # settings.py
 
-RETRIEVER_TOP_K = 4
+RETRIEVER_TOP_K = 2
 CHUNK_SIZE = 600
 CHUNK_OVERLAP = 100
-TEMPERATURE = 0.7
+TEMPERATURE = 0.0
 
 EMBEDDING_OPTIONS = {
     "E5 (multilingual)": "intfloat/multilingual-e5-large",

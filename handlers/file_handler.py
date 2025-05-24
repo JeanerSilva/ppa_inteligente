@@ -31,6 +31,8 @@ def handle_upload_and_reindex(embed_model_name):
             st.error(f"❌ Erro ao criar o vetor: {e}")
             logging.exception("Erro durante criação da base vetorial.")
 
+
+
 def display_indexed_files():
     indexed_files = st.session_state.get("indexed_files", [])
     if indexed_files:

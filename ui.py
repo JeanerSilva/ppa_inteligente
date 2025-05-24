@@ -4,7 +4,7 @@ import time
 import logging
 import streamlit as st
 from PIL import Image
-from settings import RETRIEVER_TOP_K, EMBEDDING_OPTIONS
+from settings import RETRIEVER_TOP_K, EMBEDDING_OPTIONS, TEMPERATURE
 from rag.vectorstore import load_vectorstore
 from rag.llm_loader import load_llm
 from rag.qa_chain import build_qa_chain
@@ -33,6 +33,8 @@ def render_prompt_editor():
     if prompt_selecionado == "<novo>":
         novo_nome = st.text_input("Nome do novo prompt:", key="novo_nome_prompt")
         prompt_conteudo = ""
+        logging.info("Criando novo prompt.")
+
     else:
         novo_nome = prompt_selecionado
         prompt_conteudo = prompts.get(prompt_selecionado, "")
@@ -41,12 +43,14 @@ def render_prompt_editor():
         "Conteúdo do prompt (use {context} e {question}):",
         value=prompt_conteudo,
         height=400,
-        key="prompt_editor"
+        key="prompt_editor"        
     )
+    logging.info("Editando prompt: %s", novo_nome)
 
     if st.button("💾 Salvar prompt"):
         if novo_nome.strip() == "":
             st.warning("Nome do prompt não pode estar vazio.")
+            logging.info("Nome do prompt vazio.")
         else:
             save_prompt(novo_nome.strip(), edited_prompt)
             st.session_state["prompt_template"] = edited_prompt
@@ -58,6 +62,7 @@ def render_prompt_editor():
 
 def render_sidebar():
     st.sidebar.markdown("⚙️ **Configurações**")
+    logging.info("Iniciando configuração da interface.")
     st.session_state["retriever_k"] = st.sidebar.number_input(
         label="Número de trechos a considerar (k)",
         min_value=1,
@@ -66,14 +71,27 @@ def render_sidebar():
         step=1
     )
 
+    # Sidebar: Temperatura do modelo
+    st.sidebar.markdown("🌡️ **Temperatura**")
+    st.session_state["llm_temperature"] = st.sidebar.slider(
+    "Temperatura da resposta:",
+    min_value=0.0,
+    max_value=1.0,
+    value=st.session_state.get("llm_temperature", TEMPERATURE),
+    step=0.1
+)
+
+
     st.sidebar.markdown("🧠 **Modelo de linguagem**")
     modelo_llm = st.sidebar.radio("Modo de execução:", ["Ollama (servidor)", "OpenAI (API)"])
     st.session_state["modelo_llm"] = modelo_llm
+    logging.info("Modelo de linguagem selecionado: %s", modelo_llm)
 
     st.sidebar.markdown("🧬 **Modelo de embedding**")
     embed_model_label = st.sidebar.selectbox("Escolha o modelo:", list(EMBEDDING_OPTIONS.keys()))
     embed_model_name = EMBEDDING_OPTIONS[embed_model_label]
     st.session_state["embedding_model"] = embed_model_name
+    logging.info("Modelo de embedding selecionado: %s", embed_model_name)
 
 def render_chat():
     embed_model = st.session_state["embedding_model"]
@@ -84,11 +102,13 @@ def render_chat():
         st.warning("⚠️ Nenhum índice encontrado. Reindexe primeiro.")
         st.stop()
 
-    llm = load_llm(modelo_llm)
+    llm = load_llm(modelo_llm, temperature=st.session_state["llm_temperature"])
+
     qa_chain = build_qa_chain(vectorstore, llm, st.session_state.get("prompt_name", "teste"))
 
     if not qa_chain:
         st.warning("⚠️ A chain não está carregada.")
+        logging.info("⚠️ A chain não está carregada.")
         st.stop()
 
     with st.form("chat-form", clear_on_submit=True):
@@ -120,6 +140,7 @@ def render_chat():
     if st.button("🧹 Limpar conversa"):
         st.session_state.chat_history = []
         st.session_state.last_contexts = []
+        logging.info("Conversa limpa.")
         st.rerun()
 
     if st.session_state.chat_history:
