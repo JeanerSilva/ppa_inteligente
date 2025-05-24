@@ -8,9 +8,9 @@ from settings import RETRIEVER_TOP_K, EMBEDDING_OPTIONS, TEMPERATURE
 from rag.vectorstore import load_vectorstore
 from rag.llm_loader import load_llm
 from rag.qa_chain import build_qa_chain
-from rag.prompt import get_prompt, get_saved_prompts, save_prompt
-from rag.chat_history import save_chat
+from rag.prompt import get_saved_prompts, save_prompt
 from logic import process_query
+from handlers.file_handler import handle_upload_and_reindex, display_indexed_files
 
 def render_interface():
     render_header()
@@ -93,6 +93,9 @@ def render_sidebar():
     st.session_state["embedding_model"] = embed_model_name
     logging.info("Modelo de embedding selecionado: %s", embed_model_name)
 
+    handle_upload_and_reindex(embed_model_name)
+    display_indexed_files()
+
 def render_chat():
     embed_model = st.session_state["embedding_model"]
     modelo_llm = st.session_state["modelo_llm"]
@@ -130,7 +133,7 @@ def render_chat():
     if "last_contexts" in st.session_state:
         with st.expander("📚 Trechos usados na resposta"):
             for doc in st.session_state.last_contexts:
-                source = doc.metadata.get("source", "desconhecido")
+                source = doc.metadata.get("origem", "desconhecido")
                 nome = os.path.basename(source)
                 tipo = os.path.splitext(nome)[1].replace(".", "").upper()
                 st.markdown(f"**Fonte:** `{nome}` ({tipo})")
