@@ -7,6 +7,10 @@ Embedding length	3072 tokens
 Quantização	Q4_K_M
 
 
+torch com cuda
+pip uninstall torch -y
+pip install torch --index-url https://download.pytorch.org/whl/cu118
+
 
 ollama pull mistral
 ollama run mistral
