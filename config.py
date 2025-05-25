@@ -19,7 +19,8 @@ def setup_app():
 
     # Evita adicionar múltiplos handlers ao recarregar
     if not any(isinstance(h, logging.FileHandler) and h.baseFilename.endswith("ppa.log") for h in logger.handlers):
-        file_handler = logging.FileHandler(log_path, mode="a")
+        file_handler = logging.FileHandler(log_path, mode="a", encoding="utf-8")
+
         formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s")
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)

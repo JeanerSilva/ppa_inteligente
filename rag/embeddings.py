@@ -1,6 +1,7 @@
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain.embeddings import HuggingFaceEmbeddings
 import torch
 
+print(f"torch.cuda.is_available(): {torch.cuda.is_available()}")
 
 def load_embeddings(model_name: str):
     return HuggingFaceEmbeddings(

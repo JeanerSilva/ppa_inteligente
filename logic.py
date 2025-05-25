@@ -21,7 +21,8 @@ def process_query(user_input, qa_chain):
     start = time.time()
 
     # Recuperar contexto manualmente
-    context_docs = qa_chain.retriever.get_relevant_documents(user_input)
+    context_docs = qa_chain.retriever.invoke(user_input)
+
     context_text = "\n\n".join([doc.page_content for doc in context_docs])
 
     # Renderizar prompt final

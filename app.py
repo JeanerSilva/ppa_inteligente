@@ -8,5 +8,7 @@ import sys
 import os
 sys.path.append(os.path.dirname(__file__))
 
+os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
+
 setup_app()
 render_interface()
