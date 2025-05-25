@@ -69,14 +69,11 @@ def process_query(user_input, qa_chain):
 
     # DEBUG: mostrar chunks antes e depois do reranker
     if st.session_state.get("usar_reranker_debug", False):
-        st.subheader("🔍 Comparação: Chunks Antes vs. Depois do Rerank")
-
-        st.markdown("### Antes do Reranker")
-        for i, doc in enumerate(result["source_documents"]):
-            st.markdown(f"**[{i+1}]** {doc.page_content[:300]}...")
-
-        st.markdown("### Depois do Reranker")
-        for i, doc in enumerate(fontes):
-            st.markdown(f"**[{i+1}]** {doc.page_content[:300]}...")
+        st.session_state["reranker_comparacao"] = {
+            "antes": result["source_documents"],
+            "depois": fontes
+        }
+    else:
+        st.session_state["reranker_comparacao"] = None
 
     return resposta, fontes, elapsed

@@ -20,7 +20,8 @@ BASE_URL = os.getenv("OLLAMA_HOST", "http://localhost:11434")
 llm = OllamaLLM(
             model=LLM_MODEL,
             base_url=BASE_URL,
-            temperature=TEMPERATURE
+            temperature=TEMPERATURE,
+            max_tokens=16384
         )
 
 # Garante que pastas existam

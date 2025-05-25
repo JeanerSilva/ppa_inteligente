@@ -17,9 +17,18 @@ def criar_chunk(texto, programa_id):
         }
     }
 
+def limpar_quebras(texto):
+    # Remove hífen + quebra de linha (palavras cortadas)
+    texto = re.sub(r'-\n\s*', '', texto)
+    # Junta quebras de linha que ocorrem no meio de frases (ex: entre palavras)
+    texto = re.sub(r'\n(?=[a-záéíóúâêôãõç])', ' ', texto)
+    return texto
+
+
 # 1. Lê o PDF inteiro
 doc = fitz.open(ARQUIVO_PDF)
-texto_total = "\n".join(page.get_text() for page in doc)
+texto_total = limpar_quebras("\n".join(page.get_text() for page in doc))
+
 
 # 2. Mapeia todos os programas com nome
 programas = list(re.finditer(r"PROGRAMA:\s*(\d{4})\s*-\s*(.+)", texto_total))
@@ -42,7 +51,7 @@ for match in objetivos:
             break
 
     nome_programa = programa_map.get(programa_id, "Programa desconhecido")
-    texto_final = f"PROGRAMA: {programa_id} - {nome_programa}\nObjetivos Específicos:\n{linha}"
+    texto_final = f"PROGRAMA: {programa_id} - {nome_programa} \n\nObjetivos Específicos:\n{linha}"
     chunks.append(criar_chunk(texto_final, programa_id))
 
 # 5. Salvar

@@ -1,40 +1,17 @@
-# app/ui.py
+# ui/chat.py
+
 import os
-import time
-import logging
 import streamlit as st
 from PIL import Image
-from settings import RETRIEVER_TOP_K, EMBEDDING_OPTIONS, TEMPERATURE
 from rag.llm_loader import load_llm
 from rag.qa_chain import build_qa_chain
-from rag.prompt import get_saved_prompts, save_prompt
-from logic import process_query
-from handlers.file_handler import handle_upload_and_reindex, display_indexed_files
 from rag.embeddings import load_embeddings
-from langchain_community.vectorstores import FAISS
+from logic import process_query
 from multi_faiss import MultiFAISSRetriever
+from historico_embed import render_historico
 
-from historico_embed import render_historico  # importe a nova função
-
-def render_interface():
-    render_sidebar()  # mantém à esquerda
-    render_header()
-
-
-
-    # Criar layout com largura máxima
-    container = st.container()
-    with container:
-        col1, col2 = st.columns([2, 1], gap="large")  # coluna principal (chat) mais larga
-
-        with col1:
-            render_prompt_editor()
-            render_chat()
-
-        with col2:
-            render_historico()
-
-
+from rag.prompt import get_saved_prompts, save_prompt
+from langchain_community.vectorstores import FAISS
 
 def render_header():
     img = Image.open("ppa.png")
@@ -51,7 +28,6 @@ def render_prompt_editor():
     if prompt_selecionado == "<novo>":
         novo_nome = st.text_input("Nome do novo prompt:", key="novo_nome_prompt")
         prompt_conteudo = ""
-        logging.info("Criando novo prompt.")
     else:
         novo_nome = prompt_selecionado
         prompt_conteudo = prompts.get(prompt_selecionado, "")
@@ -73,42 +49,6 @@ def render_prompt_editor():
             st.success(f"Prompt '{novo_nome}' salvo com sucesso!")
 
     st.session_state["prompt_template"] = edited_prompt
-
-def render_sidebar():
-    st.sidebar.markdown("⚙️ **Configurações**")
-    st.session_state["retriever_k"] = st.sidebar.slider(
-        label="Número de trechos a considerar:",
-        min_value=1,
-        max_value=20,
-        value=st.session_state.get("retriever_k", RETRIEVER_TOP_K),
-        step=1
-    )
-
-    st.sidebar.markdown("🌡️ **Temperatura**")
-    st.session_state["llm_temperature"] = st.sidebar.slider(
-        "Temperatura da resposta:",
-        min_value=0.0,
-        max_value=1.0,
-        value=st.session_state.get("llm_temperature", TEMPERATURE),
-        step=0.1
-    )
-
-    modelo_llm = st.sidebar.radio("Modo de execução:", ["Ollama (servidor)", "OpenAI (API)"])
-    st.session_state["modelo_llm"] = modelo_llm
-
-    embed_model_label = st.sidebar.selectbox("Escolha o modelo:", list(EMBEDDING_OPTIONS.keys()))
-    embed_model_name = EMBEDDING_OPTIONS[embed_model_label]
-    st.session_state["embedding_model"] = embed_model_name
-
-    # Novidade: seleção de múltiplos índices FAISS
-    st.sidebar.markdown("📂 **Índices FAISS disponíveis**")
-    base_path = r"C:\SEPLAN\rag_ollama_home\vectors\vectordb_multilingual_e5_large"
-    faiss_list = [name for name in os.listdir(base_path) if os.path.isdir(os.path.join(base_path, name))]
-    selecionados = st.sidebar.multiselect("Escolha os índices:", faiss_list)
-    st.session_state["faiss_selecionados"] = [os.path.join(base_path, nome) for nome in selecionados]
-
-    handle_upload_and_reindex(embed_model_name)
-    display_indexed_files()
 
 def render_chat():
     embed_model = st.session_state["embedding_model"]
@@ -134,27 +74,26 @@ def render_chat():
         store.as_retriever(search_kwargs={"k": st.session_state["retriever_k"]})
         for store in vectorstores
     ]
-
     retriever = MultiFAISSRetriever(retrievers=retrievers, k=st.session_state["retriever_k"])
 
     llm = load_llm(modelo_llm, temperature=st.session_state["llm_temperature"])
     qa_chain = build_qa_chain(retriever, llm, st.session_state.get("prompt_name", "teste"))
 
+    # Primeiro renderiza o histórico do chat
+    for role, msg in st.session_state.chat_history:
+        with st.chat_message("user" if role == "user" else "assistant"):
+            st.markdown(msg)
+
+    # Depois renderiza a caixa de entrada
     with st.form("chat-form", clear_on_submit=True):
         user_input = st.text_input("Digite sua pergunta:", value="")
         submitted = st.form_submit_button("Enviar")
 
     if submitted and user_input:
         resposta, fontes, elapsed = process_query(user_input, qa_chain)
-        st.sidebar.success(f"⏱️ Resposta em {elapsed:.2f} segundos")
+        st.session_state["resposta_gerada"] = True  # marcador opcional
+        st.rerun()  # força recarregamento com novo estado
 
-        with st.expander("🔌 Depuração: Chunks retornados pelo retriever"):
-            for doc in fontes:
-                st.markdown(doc.page_content)
-
-    for role, msg in st.session_state.chat_history:
-        with st.chat_message("user" if role == "user" else "assistant"):
-            st.markdown(msg)
 
     if "last_contexts" in st.session_state:
         with st.expander("📚 Trechos usados na resposta"):
@@ -176,3 +115,38 @@ def render_chat():
             if role == "bot":
                 st.download_button("📅 Baixar última resposta", msg, file_name="resposta.txt")
                 break
+
+    if st.session_state.get("reranker_comparacao"):
+        comparacao = st.session_state["reranker_comparacao"]
+        with st.expander("🔬 Comparação com Reranker (Antes vs Depois)"):
+            st.markdown("### 🟡 Antes do Reranker")
+            for i, doc in enumerate(comparacao["antes"], 1):
+                source = doc.metadata.get("origem", "desconhecido")
+                nome = os.path.basename(source)
+                st.markdown(f"**[{i}] Fonte:** `{nome}`")
+                st.markdown(doc.page_content[:500].strip() + "...")
+                st.markdown("---")
+
+            st.markdown("### 🟢 Depois do Reranker")
+            for i, doc in enumerate(comparacao["depois"], 1):
+                source = doc.metadata.get("origem", "desconhecido")
+                nome = os.path.basename(source)
+                st.markdown(f"**[{i}] Fonte:** `{nome}`")
+                st.markdown(doc.page_content[:500].strip() + "...")
+                st.markdown("---")
+
+
+
+def render_interface():
+    from ui.sidebar import render_sidebar
+    render_sidebar()
+    render_header()
+
+    container = st.container()
+    with container:
+        col1, col2 = st.columns([2, 1], gap="large")
+        with col1:
+            render_prompt_editor()
+            render_chat()
+        with col2:
+            render_historico()

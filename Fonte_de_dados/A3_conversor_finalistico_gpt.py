@@ -21,12 +21,19 @@ def criar_chunk(texto, programa_id, categoria):
         }
     }
 
+def limpar_quebras(texto):
+    # Remove hífen + quebra de linha (palavras cortadas)
+    texto = re.sub(r'-\n\s*', '', texto)
+    # Junta linhas quebradas dentro de frases
+    texto = re.sub(r'\n(?=\w)', ' ', texto)
+    return texto
+
 # 1. Carrega texto completo
 doc = fitz.open(ARQUIVO_PDF)
 texto = ""
 paginas = []
 for page in doc:
-    page_text = page.get_text()
+    page_text = limpar_quebras(page.get_text())
     texto += page_text
     paginas.append(page_text)
 
@@ -39,7 +46,8 @@ for bloco in blocos:
         continue
 
     # Programa ID e título
-    match = re.search(r"PROGRAMA:\s*(\d{4})\s*-\s*(.+)", bloco)
+    match = re.search(r"PROGRAMA:\s*(\d{4})\s*-\s*(.+?)(?=\n|Objetivo Geral:)", bloco)
+
     if not match:
         continue
 
@@ -53,12 +61,16 @@ for bloco in blocos:
         chunks.append(criar_chunk(f"{programa_nome}\n\nObjetivo Geral:\n{texto_og}", programa_id, "objetivo_geral"))
 
     # Objetivos Estratégicos: cada linha com •
-    estrategicos = re.findall(r"^•\s*.+", bloco, flags=re.MULTILINE)
+    bloco_limpo = bloco.split("Público Alvo:")[0]
+    estrategicos = re.findall(r"^•\s*.+", bloco_limpo, flags=re.MULTILINE)
+
+
     for item in estrategicos:
         chunks.append(criar_chunk(f"{programa_nome}\n\nObjetivos Estratégicos:\n{item.strip()}", programa_id, "objetivos_estrategicos"))
 
     # Público Alvo: cada linha com - ou primeira após título
-    match_pa = re.search(r"Público Alvo:(.+?)(?=(Órgão Responsável:|Objetivos Específicos:|PROGRAMA:|$))", bloco, flags=re.DOTALL)
+    match_pa = re.search(r"Público Alvo:(.+?)(?=([OÓ]rg[ãa]o Respons[áa]vel:|Objetivos Específicos:|PROGRAMA:|$))", bloco, flags=re.DOTALL | re.IGNORECASE)
+
     if match_pa:
         bloco_pa = match_pa.group(1).strip()
         linhas_pa = [l.strip() for l in bloco_pa.split("\n") if l.strip()]
@@ -67,20 +79,18 @@ for bloco in blocos:
                 chunks.append(criar_chunk(f"{programa_nome}\n\nPúblico Alvo:\n{linha}", programa_id, "publico_alvo"))
 
     # Órgão Responsável
-    match_or = re.search(r"Órgão Responsável:\s*(.+)", bloco)
+    match_or = re.search(
+        r"[OÓ]rg[ãa]o Respons[áa]vel:\s*(.+)",
+        bloco,
+        flags=re.IGNORECASE
+    )
     if match_or:
-        org = match_or.group(1).strip()
-        chunks.append(criar_chunk(f"{programa_nome}\n\nÓrgão Responsável:\n{org}", programa_id, "orgao_responsavel"))
-
-# 3. Objetivos Específicos: varre TODO o texto globalmente
-objetivos_especificos = re.findall(r"^(\d{4})\s+-\s+(.+)", texto, flags=re.MULTILINE)
-for codigo, descricao in objetivos_especificos:
-    objetivo_texto = f"{codigo} - {descricao}"
-    # Tentativa de programa_id heurística: pega última ocorrência antes do código
-    contexto = texto[:texto.find(objetivo_texto)]
-    match_prog = re.findall(r"PROGRAMA:\s*(\d{4})", contexto)
-    programa_id = match_prog[-1] if match_prog else "desconhecido"
-    chunks.append(criar_chunk(f"Objetivos Específicos:\n{objetivo_texto}", programa_id, "objetivos_especificos"))
+        linha_orgao = match_or.group(1).strip()
+        # Captura somente até a primeira quebra de linha (sem pegar tabelas)
+        primeira_linha = linha_orgao.splitlines()[0].strip()
+        # Remove qualquer dado numérico ou valores suspeitos após o nome do órgão
+        primeira_linha = re.split(r"\d", primeira_linha)[0].strip()
+        chunks.append(criar_chunk(f"{programa_nome}\n\nÓrgão Responsável:\n{primeira_linha}", programa_id, "orgao_responsavel"))
 
 # 4. Exporta como JSONL
 with open(ARQUIVO_JSONL, "w", encoding="utf-8") as f:
