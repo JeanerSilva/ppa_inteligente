@@ -10,11 +10,14 @@ class LocalReranker:
         self.model = AutoModelForSequenceClassification.from_pretrained(model_name).to(self.device)
 
     def rerank(self, query: str, docs: List[Document], top_k: int = 5) -> List[Document]:
+        if not docs:
+            return []
         pairs = [(query, doc.page_content) for doc in docs]
         scores = self._score_pairs(pairs)
         doc_scores = list(zip(docs, scores))
         doc_scores.sort(key=lambda x: x[1], reverse=True)
         return [doc for doc, _ in doc_scores[:top_k]]
+
 
     def _score_pairs(self, pairs: List[Tuple[str, str]]) -> List[float]:
         encoded = self.tokenizer(

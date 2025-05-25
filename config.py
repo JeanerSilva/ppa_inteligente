@@ -10,7 +10,16 @@ def setup_app():
     st.set_page_config(page_title="PPA Inteligente", page_icon="🧐", layout="wide")
     # Opcional: debug para comparar chunks antes e depois do rerank
     st.sidebar.markdown("🧪 **Debug de Reranker**")
-    st.sidebar.checkbox("🔬 .session_state.get("usogging.FileHandler(log_path, mode="a")
+    st.sidebar.checkbox("🔬 Mostrar comparação do reranker", value=False, key="usar_reranker_debug")
+
+    log_path = "ppa.log"
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    logging.info("✅ Aplicativo iniciado.")
+
+    # Evita adicionar múltiplos handlers ao recarregar
+    if not any(isinstance(h, logging.FileHandler) and h.baseFilename.endswith("ppa.log") for h in logger.handlers):
+        file_handler = logging.FileHandler(log_path, mode="a")
         formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s")
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)

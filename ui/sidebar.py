@@ -33,7 +33,7 @@ def render_sidebar():
     st.session_state["embedding_model"] = embed_model_name
 
     st.sidebar.markdown("📂 **Índices FAISS disponíveis**")
-    base_path = r"C:\SEPLAN\rag_ollama_home\vectors\vectordb_multilingual_e5_large"
+    base_path = r"C:\SEPLAN\rag_ollama_home\vectors\modelos"
     faiss_list = [name for name in os.listdir(base_path) if os.path.isdir(os.path.join(base_path, name))]
     selecionados = st.sidebar.multiselect("Escolha os índices:", faiss_list)
     st.session_state["faiss_selecionados"] = [os.path.join(base_path, nome) for nome in selecionados]
