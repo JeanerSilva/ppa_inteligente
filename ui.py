@@ -14,11 +14,41 @@ from rag.embeddings import load_embeddings
 from langchain_community.vectorstores import FAISS
 from multi_faiss import MultiFAISSRetriever
 
+from historico_embed import render_historico  # importe a nova função
+
 def render_interface():
+    render_sidebar()  # mantém à esquerda
     render_header()
-    render_prompt_editor()
-    render_sidebar()
-    render_chat()
+
+    # Estilo para expandir as colunas ao máximo da largura
+    st.markdown("""
+        <style>
+        .block-container {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .main .block-container {
+            max-width: 100%;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+
+    # Criar layout com largura máxima
+    container = st.container()
+    with container:
+        col1, col2 = st.columns([2, 1], gap="large")  # coluna principal (chat) mais larga
+
+        with col1:
+            render_prompt_editor()
+            render_chat()
+
+        with col2:
+            render_historico()
+
+
 
 def render_header():
     img = Image.open("ppa.png")

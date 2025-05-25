@@ -26,7 +26,7 @@ nome_pasta_sanitizado = re.sub(r'\W+', '_', nome_pasta)  # Remove caracteres esp
 PASTA_SAIDA = "chunks"
 PASTA_TXT = os.path.join(PASTA_SAIDA, "txt_limpo")
 ARQUIVO_JSONL = os.path.join(PASTA_SAIDA, f"chunks_{nome_pasta_sanitizado}.jsonl")
-LIMITE_CARACTERES = 1500
+LIMITE_CARACTERES = 500
 
 # Garante que as pastas existam
 os.makedirs(PASTA_SAIDA, exist_ok=True)
