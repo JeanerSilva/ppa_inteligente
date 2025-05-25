@@ -7,7 +7,7 @@ from rag.utils import load_indexed_files
 
 def setup_app():
 
-    st.set_page_config(page_title="PPA Inteligente", page_icon="🧐")
+    st.set_page_config(page_title="PPA Inteligente", page_icon="🧐", layout="wide")
     # Opcional: debug para comparar chunks antes e depois do rerank
     st.sidebar.markdown("🧪 **Debug de Reranker**")
     st.sidebar.checkbox("🔬 Mostrar comparação do reranker", value=False, key="usar_reranker_debug")

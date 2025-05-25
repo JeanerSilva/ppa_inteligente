@@ -20,20 +20,6 @@ def render_interface():
     render_sidebar()  # mantém à esquerda
     render_header()
 
-    # Estilo para expandir as colunas ao máximo da largura
-    st.markdown("""
-        <style>
-        .block-container {
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
-        .main .block-container {
-            max-width: 100%;
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-        </style>
-    """, unsafe_allow_html=True)
 
 
     # Criar layout com largura máxima

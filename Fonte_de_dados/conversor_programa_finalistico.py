@@ -15,7 +15,11 @@ def extrair_linhas(page):
     linhas = texto.split("\n")
     return [{"text": linha.strip(), "index": i} for i, linha in enumerate(linhas) if linha.strip()]
 
+def is_objetivo_especifico(texto):
+    return re.match(r"^\d{4} - ", texto)
+
 def reconstruir_paragrafo(linhas):
+    """ Junta linhas que terminam sem pontuação final, como ponto final. """
     buffer = ""
     paragrafos = []
 
@@ -38,10 +42,6 @@ def reconstruir_paragrafo(linhas):
 
     return paragrafos
 
-def extrair_id_programa(texto):
-    match = re.match(r"PROGRAMA:\s*(\d+)", texto)
-    return match.group(1) if match else "desconhecido"
-
 # Inicialização
 doc = fitz.open(ARQUIVO_PDF)
 resultados = []
@@ -59,14 +59,14 @@ for page in doc:
 
         if l_norm.startswith("programa:"):
             if programa_atual:
-                if buffer_secao and secao_atual == "objetivos_especificos":
-                    programa_atual["objetivos_especificos"].extend(reconstruir_paragrafo(buffer_secao))
+                if buffer_secao and secao_atual:
+                    if secao_atual == "objetivos_especificos":
+                        programa_atual["objetivos_especificos"].extend(reconstruir_paragrafo(buffer_secao))
+                    buffer_secao = []
                 resultados.append(programa_atual)
 
             programa_atual = {
                 "programa": l,
-                "programa_id": extrair_id_programa(l),
-                "objetivo_geral": "",
                 "objetivos_estrategicos": [],
                 "publico_alvo": [],
                 "orgao_responsavel": "",
@@ -78,25 +78,6 @@ for page in doc:
             continue
 
         if "objetivo geral" in l_norm:
-            secao_atual = "objetivo_geral"
-            buffer_secao = []
-            i += 1
-            while i < len(linhas):
-                prox = linhas[i]["text"].strip()
-                prox_norm = normalizar(prox)
-
-                if prox_norm.startswith(("objetivos estrategicos", "publico alvo", "orgao responsavel", "objetivos especificos")):
-                    break
-                if prox.startswith("•"):  # interrompe se encontrar bullet
-                    break
-
-                buffer_secao.append(prox)
-                i += 1
-
-            programa_atual["objetivo_geral"] = " ".join(buffer_secao).strip()
-            continue
-
-        elif "objetivo estrategico" in l_norm or "objetivos estrategicos" in l_norm:
             secao_atual = "objetivos_estrategicos"
 
         elif "publico alvo" in l_norm:
@@ -110,17 +91,20 @@ for page in doc:
                     programa_atual["orgao_responsavel"] = linha_abaixo
                     i += 1
 
-        elif "objetivos especificos" in l_norm:
+        elif "objetivos especificos do programa" in l_norm:
             if buffer_secao and secao_atual == "objetivos_especificos":
                 programa_atual["objetivos_especificos"].extend(reconstruir_paragrafo(buffer_secao))
             buffer_secao = []
             secao_atual = "objetivos_especificos"
 
+        # Captura seções com estrutura apropriada
         elif secao_atual == "objetivos_estrategicos" and l.startswith("•"):
             programa_atual["objetivos_estrategicos"].append(l)
 
         elif secao_atual == "publico_alvo":
-            if l.startswith("-") or len(programa_atual["publico_alvo"]) == 0:
+            if l.startswith("-"):
+                programa_atual["publico_alvo"].append(l)
+            elif len(programa_atual["publico_alvo"]) == 0:
                 programa_atual["publico_alvo"].append(l)
 
         elif secao_atual == "objetivos_especificos":
@@ -136,54 +120,27 @@ if programa_atual:
 
 print(f"✅ Extração concluída com {len(resultados)} programas.")
 
-# Geração dos chunks formatados
+# Converter para JSONL com metadados
 chunks_formatados = []
+for programa in resultados:
+    texto = f"{programa['programa']}\n\n"
+    if programa["objetivos_estrategicos"]:
+        texto += "Objetivos Estratégicos:\n" + "\n".join(programa["objetivos_estrategicos"]) + "\n\n"
+    if programa["publico_alvo"]:
+        texto += "Público Alvo:\n" + "\n".join(programa["publico_alvo"]) + "\n\n"
+    if programa["orgao_responsavel"]:
+        texto += f"Órgão Responsável: {programa['orgao_responsavel']}\n\n"
+    if programa["objetivos_especificos"]:
+        texto += "Objetivos Específicos:\n" + "\n".join(programa["objetivos_especificos"]) + "\n\n"
 
-def criar_chunk(base_programa, programa_id, categoria, conteudo):
-    return {
-        "text": f"{base_programa}\n\n{categoria.replace('_', ' ').title()}:\n{conteudo}",
+    chunks_formatados.append({
+        "text": texto.strip(),
         "metadata": {
             "origem": "programas_finalisticos.pdf",
-            "chunk_id": str(uuid.uuid4()),
-            "programa_id": programa_id,
-            "categoria": categoria
+            "chunk_id": str(uuid.uuid4())
         }
-    }
+    })
 
-for programa in resultados:
-    base_programa = programa["programa"]
-    programa_id = programa["programa_id"]
-
-    if programa.get("objetivo_geral"):
-        chunks_formatados.append(
-            criar_chunk(base_programa, programa_id, "objetivo_geral", programa["objetivo_geral"])
-        )
-
-    if programa["objetivos_estrategicos"]:
-        texto = "\n".join(programa["objetivos_estrategicos"])
-        chunks_formatados.append(
-            criar_chunk(base_programa, programa_id, "objetivos_estrategicos", texto)
-        )
-
-    if programa["publico_alvo"]:
-        texto = "\n".join(programa["publico_alvo"])
-        chunks_formatados.append(
-            criar_chunk(base_programa, programa_id, "publico_alvo", texto)
-        )
-
-    if programa["orgao_responsavel"]:
-        texto = programa["orgao_responsavel"]
-        chunks_formatados.append(
-            criar_chunk(base_programa, programa_id, "orgao_responsavel", texto)
-        )
-
-    if programa["objetivos_especificos"]:
-        texto = "\n".join(programa["objetivos_especificos"])
-        chunks_formatados.append(
-            criar_chunk(base_programa, programa_id, "objetivos_especificos", texto)
-        )
-
-# Salvar os chunks como JSONL
 with open(ARQUIVO_JSONL, "w", encoding="utf-8") as f_out:
     for chunk in chunks_formatados:
         f_out.write(json.dumps(chunk, ensure_ascii=False) + "\n")
