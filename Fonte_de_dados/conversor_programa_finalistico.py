@@ -8,11 +8,9 @@ ARQUIVO_PDF = "pdf/normas/anexo-iii-programas-finalisticos.pdf"
 ARQUIVO_JSONL = "chunks/chunks_programas_finalisticos.jsonl"
 
 def normalizar(texto):
-    """Remove acentos e coloca em minúsculas para comparação robusta."""
     return unicodedata.normalize("NFKD", texto).encode("ASCII", "ignore").decode("ASCII").lower()
 
 def extrair_linhas(page):
-    """Extrai todas as linhas visíveis do PDF (modo texto simples)."""
     texto = page.get_text("text")
     linhas = texto.split("\n")
     return [{"text": linha.strip(), "index": i} for i, linha in enumerate(linhas) if linha.strip()]
@@ -20,11 +18,36 @@ def extrair_linhas(page):
 def is_objetivo_especifico(texto):
     return re.match(r"^\d{4} - ", texto)
 
+def reconstruir_paragrafo(linhas):
+    """ Junta linhas que terminam sem pontuação final, como ponto final. """
+    buffer = ""
+    paragrafos = []
+
+    for linha in linhas:
+        l = linha.strip()
+        if not l:
+            continue
+
+        if buffer:
+            buffer += ' ' + l
+        else:
+            buffer = l
+
+        if re.search(r'[.;!?…]$', l):
+            paragrafos.append(buffer.strip())
+            buffer = ""
+
+    if buffer:
+        paragrafos.append(buffer.strip())
+
+    return paragrafos
+
 # Inicialização
 doc = fitz.open(ARQUIVO_PDF)
 resultados = []
 programa_atual = None
 secao_atual = None
+buffer_secao = []
 
 for page in doc:
     linhas = extrair_linhas(page)
@@ -34,10 +57,14 @@ for page in doc:
         l = linhas[i]["text"]
         l_norm = normalizar(l)
 
-        # Novo programa
         if l_norm.startswith("programa:"):
             if programa_atual:
+                if buffer_secao and secao_atual:
+                    if secao_atual == "objetivos_especificos":
+                        programa_atual["objetivos_especificos"].extend(reconstruir_paragrafo(buffer_secao))
+                    buffer_secao = []
                 resultados.append(programa_atual)
+
             programa_atual = {
                 "programa": l,
                 "objetivos_estrategicos": [],
@@ -46,10 +73,10 @@ for page in doc:
                 "objetivos_especificos": []
             }
             secao_atual = None
+            buffer_secao = []
             i += 1
             continue
 
-        # Detecção de seções com texto normalizado
         if "objetivo geral" in l_norm:
             secao_atual = "objetivos_estrategicos"
 
@@ -62,12 +89,15 @@ for page in doc:
                 linha_abaixo = linhas[i + 1]["text"].strip()
                 if linha_abaixo:
                     programa_atual["orgao_responsavel"] = linha_abaixo
-                    i += 1  # pula a linha que já usamos
+                    i += 1
 
         elif "objetivos especificos do programa" in l_norm:
+            if buffer_secao and secao_atual == "objetivos_especificos":
+                programa_atual["objetivos_especificos"].extend(reconstruir_paragrafo(buffer_secao))
+            buffer_secao = []
             secao_atual = "objetivos_especificos"
 
-        # Captura conteúdo das seções
+        # Captura seções com estrutura apropriada
         elif secao_atual == "objetivos_estrategicos" and l.startswith("•"):
             programa_atual["objetivos_estrategicos"].append(l)
 
@@ -75,42 +105,22 @@ for page in doc:
             if l.startswith("-"):
                 programa_atual["publico_alvo"].append(l)
             elif len(programa_atual["publico_alvo"]) == 0:
-                # Assume que é uma linha única de público-alvo
                 programa_atual["publico_alvo"].append(l)
 
-
-        elif secao_atual == "objetivos_especificos" and is_objetivo_especifico(l):
-            programa_atual["objetivos_especificos"].append(l)
+        elif secao_atual == "objetivos_especificos":
+            buffer_secao.append(l)
 
         i += 1
 
-# Adiciona o último programa
+# Finaliza o último programa
 if programa_atual:
+    if buffer_secao and secao_atual == "objetivos_especificos":
+        programa_atual["objetivos_especificos"].extend(reconstruir_paragrafo(buffer_secao))
     resultados.append(programa_atual)
-
-## Exporta JSON
-#with open("chunks/programas_finalisticos.json", "w", encoding="utf-8") as f_json:
-#    json.dump(resultados, f_json, indent=2, ensure_ascii=False)
-
-# Exporta TXT
-#with open("pdf/programas_final.txt", "w", encoding="utf-8") as f_txt:
-#    for prog in resultados:
-#        f_txt.write(f"{prog['programa']}\n\n")
-#        f_txt.write("Objetivos Estratégicos:\n")
-#        for o in prog["objetivos_estrategicos"]:
-#            f_txt.write(f"  - {o}\n")
-#        f_txt.write("\nPúblico Alvo:\n")
-#        for p in prog["publico_alvo"]:
-#            f_txt.write(f"  - {p}\n")
-#        f_txt.write(f"\nÓrgão Responsável:\n  {prog['orgao_responsavel']}\n")
-#        f_txt.write("\nObjetivos Específicos:\n")
-#        for oe in prog["objetivos_especificos"]:
-#            f_txt.write(f"  - {oe}\n")
-#        f_txt.write("\n" + "="*60 + "\n\n")
 
 print(f"✅ Extração concluída com {len(resultados)} programas.")
 
-# Converter estrutura para chunks formatados
+# Converter para JSONL com metadados
 chunks_formatados = []
 for programa in resultados:
     texto = f"{programa['programa']}\n\n"
@@ -131,7 +141,6 @@ for programa in resultados:
         }
     })
 
-# Salvar em JSONL
 with open(ARQUIVO_JSONL, "w", encoding="utf-8") as f_out:
     for chunk in chunks_formatados:
         f_out.write(json.dumps(chunk, ensure_ascii=False) + "\n")
