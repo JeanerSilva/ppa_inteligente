@@ -1,6 +1,6 @@
 
 ✅ Tem que montar tabelas atualizadas ou criar PDF mais preciso
-✅Fazer checkbox de quais fontes procurar (arquivos FAISS)
+✅ Fazer checkbox de quais fontes procurar (arquivos FAISS)
 ✅ Contar tokens que vao pra llm
 
 ⚠️ Limites de caracteres na hora de criar chunks tem que ser proporcional ao chunks_size
@@ -9,6 +9,12 @@
 Separar UI em sidebar e chat
 📌 Cuspir texto aos poucos
 
+⚠️ Cuda não funciona com FAISS no windows. 
+    Situação	             Status
+    PyTorch com CUDA	        ✅ OK (torch.cuda.is_available() é True)
+    FAISS com GPU no Windows    ❌ Não suportado oficialmente
+    FAISS com CPU (AVX2)	    ✅ Está funcionando
+    Soluções	                Use FAISS na CPU ou rode via WSL2 Linux para usar GPU
 
 
 👉 Os objetivos estrategicos (objetivos no SIOP) estao em 2023. Não tem o 1144.
