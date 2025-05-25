@@ -5,13 +5,14 @@ import logging
 import streamlit as st
 from PIL import Image
 from settings import RETRIEVER_TOP_K, EMBEDDING_OPTIONS, TEMPERATURE
-from rag.vectorstore import load_vectorstore
 from rag.llm_loader import load_llm
 from rag.qa_chain import build_qa_chain
 from rag.prompt import get_saved_prompts, save_prompt
 from logic import process_query
 from handlers.file_handler import handle_upload_and_reindex, display_indexed_files
-
+from rag.embeddings import load_embeddings
+from langchain_community.vectorstores import FAISS
+from multi_faiss import MultiFAISSRetriever
 
 def render_interface():
     render_header()
@@ -35,7 +36,6 @@ def render_prompt_editor():
         novo_nome = st.text_input("Nome do novo prompt:", key="novo_nome_prompt")
         prompt_conteudo = ""
         logging.info("Criando novo prompt.")
-
     else:
         novo_nome = prompt_selecionado
         prompt_conteudo = prompts.get(prompt_selecionado, "")
@@ -46,28 +46,20 @@ def render_prompt_editor():
         height=400,
         key="prompt_editor"        
     )
-    logging.info("Editando prompt: %s", novo_nome)
 
     if st.button("💾 Salvar prompt"):
         if novo_nome.strip() == "":
             st.warning("Nome do prompt não pode estar vazio.")
-            logging.info("Nome do prompt vazio.")
         else:
             save_prompt(novo_nome.strip(), edited_prompt)
             st.session_state["prompt_template"] = edited_prompt
             st.session_state["prompt_name"] = novo_nome
             st.success(f"Prompt '{novo_nome}' salvo com sucesso!")
-            #st.rerun()
 
     st.session_state["prompt_template"] = edited_prompt
 
 def render_sidebar():
     st.sidebar.markdown("⚙️ **Configurações**")
-    logging.info("Iniciando configuração da interface.")
-
-     # Sidebar: k (quantidade de trechos)
-    st.sidebar.markdown("📑 **Número de trechos (k)**")
-    st.sidebar.markdown("🔍 1 = Mais específico | 20 = Mais abrangente")
     st.session_state["retriever_k"] = st.sidebar.slider(
         label="Número de trechos a considerar:",
         min_value=1,
@@ -76,9 +68,7 @@ def render_sidebar():
         step=1
     )
 
-    # Sidebar: Temperatura do modelo
     st.sidebar.markdown("🌡️ **Temperatura**")
-    st.sidebar.markdown("🧊 0.0 = Mais direto | 🔥 1.0 = Mais criativo")
     st.session_state["llm_temperature"] = st.sidebar.slider(
         "Temperatura da resposta:",
         min_value=0.0,
@@ -87,17 +77,19 @@ def render_sidebar():
         step=0.1
     )
 
-
-    st.sidebar.markdown("🧠 **Modelo de linguagem**")
     modelo_llm = st.sidebar.radio("Modo de execução:", ["Ollama (servidor)", "OpenAI (API)"])
     st.session_state["modelo_llm"] = modelo_llm
-    logging.info("Modelo de linguagem selecionado: %s", modelo_llm)
 
-    st.sidebar.markdown("🧬 **Modelo de embedding**")
     embed_model_label = st.sidebar.selectbox("Escolha o modelo:", list(EMBEDDING_OPTIONS.keys()))
     embed_model_name = EMBEDDING_OPTIONS[embed_model_label]
     st.session_state["embedding_model"] = embed_model_name
-    logging.info("Modelo de embedding selecionado: %s", embed_model_name)
+
+    # Novidade: seleção de múltiplos índices FAISS
+    st.sidebar.markdown("📂 **Índices FAISS disponíveis**")
+    base_path = r"C:\SEPLAN\rag_ollama_home\vectors\vectordb_multilingual_e5_large"
+    faiss_list = [name for name in os.listdir(base_path) if os.path.isdir(os.path.join(base_path, name))]
+    selecionados = st.sidebar.multiselect("Escolha os índices:", faiss_list)
+    st.session_state["faiss_selecionados"] = [os.path.join(base_path, nome) for nome in selecionados]
 
     handle_upload_and_reindex(embed_model_name)
     display_indexed_files()
@@ -105,20 +97,32 @@ def render_sidebar():
 def render_chat():
     embed_model = st.session_state["embedding_model"]
     modelo_llm = st.session_state["modelo_llm"]
+    faiss_paths = st.session_state.get("faiss_selecionados", [])
+    vectorstores = []
 
-    vectorstore = load_vectorstore(embed_model)
-    if not vectorstore:
-        st.warning("⚠️ Nenhum índice encontrado. Reindexe primeiro.")
+    for path in faiss_paths:
+        index_file = os.path.join(path, "index.faiss")
+        if os.path.exists(index_file):
+            embeddings = load_embeddings(embed_model)
+            try:
+                store = FAISS.load_local(path, embeddings, allow_dangerous_deserialization=True)
+                vectorstores.append(store)
+            except Exception as e:
+                st.warning(f"Erro ao carregar índice FAISS em {path}: {e}")
+
+    if not vectorstores:
+        st.warning("⚠️ Nenhum índice FAISS válido selecionado.")
         st.stop()
+
+    retrievers = [
+        store.as_retriever(search_kwargs={"k": st.session_state["retriever_k"]})
+        for store in vectorstores
+    ]
+
+    retriever = MultiFAISSRetriever(retrievers=retrievers, k=st.session_state["retriever_k"])
 
     llm = load_llm(modelo_llm, temperature=st.session_state["llm_temperature"])
-
-    qa_chain = build_qa_chain(vectorstore, llm, st.session_state.get("prompt_name", "teste"))
-
-    if not qa_chain:
-        st.warning("⚠️ A chain não está carregada.")
-        logging.info("⚠️ A chain não está carregada.")
-        st.stop()
+    qa_chain = build_qa_chain(retriever, llm, st.session_state.get("prompt_name", "teste"))
 
     with st.form("chat-form", clear_on_submit=True):
         user_input = st.text_input("Digite sua pergunta:", value="")
@@ -149,7 +153,6 @@ def render_chat():
     if st.button("🧹 Limpar conversa"):
         st.session_state.chat_history = []
         st.session_state.last_contexts = []
-        logging.info("Conversa limpa.")
         st.rerun()
 
     if st.session_state.chat_history:
@@ -157,4 +160,3 @@ def render_chat():
             if role == "bot":
                 st.download_button("📅 Baixar última resposta", msg, file_name="resposta.txt")
                 break
-

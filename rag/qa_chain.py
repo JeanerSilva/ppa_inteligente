@@ -4,19 +4,14 @@ from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from rag.prompt import get_prompt
 import streamlit as st
-
 from rag.reranker_local import LocalReranker
 
 def rerank_documents(query, docs):
     reranker = LocalReranker()
     return reranker.rerank(query, docs, top_k=st.session_state["retriever_k"])
 
-
-def build_qa_chain(vectorstore, llm, prompt_template_name="teste"):
-    """Constrói a QA chain com o prompt nomeado no prompt_templates.json."""
-
+def build_qa_chain(retriever, llm, prompt_template_name="teste"):
     prompt_text = get_prompt(prompt_template_name)
-
     if not prompt_text:
         raise ValueError(f"❌ Prompt '{prompt_template_name}' não encontrado.")
 
@@ -24,8 +19,6 @@ def build_qa_chain(vectorstore, llm, prompt_template_name="teste"):
         input_variables=["context", "question"],
         template=prompt_text
     )
-
-    retriever = vectorstore.as_retriever(search_kwargs={"k": st.session_state["retriever_k"]})
 
     chain = RetrievalQA.from_chain_type(
         llm=llm,

@@ -5,3 +5,5 @@ Na planilha do BI náo tem os objetivos estrategicos
 Tem uma tabela separada com objetivos estrategicos no menu do PPA, mas seu conteudo náo tem nada a ver
 
 Fazer checkbox de quais fontes procurar (arquivos FAISS)
+
+Limites de caracteres na hora de criar chunks tem que ser proporcional ao chunks_size

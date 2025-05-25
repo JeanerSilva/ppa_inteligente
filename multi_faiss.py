@@ -1,18 +1,23 @@
-from langchain_community.vectorstores import FAISS
-from langchain_core.vectorstores import VectorStore
+# multi_faiss.py
 
-class MultiFAISSRetriever:
-    def __init__(self, stores, search_kwargs=None):
-        self.stores = stores
-        self.search_kwargs = search_kwargs or {"k": 5}
+from typing import List
+from langchain.schema import BaseRetriever, Document
+from langchain_core.documents import Document  # compatível com algumas versões
+from pydantic import Field
 
-    def get_relevant_documents(self, query):
-        all_results = []
-        k = self.search_kwargs.get("k", 5)
-        for store in self.stores:
+class MultiFAISSRetriever(BaseRetriever):
+    retrievers: List[BaseRetriever] = Field(...)
+    k: int = Field(default=5)
+
+    def get_relevant_documents(self, query: str) -> List[Document]:
+        all_docs = []
+        for retriever in self.retrievers:
             try:
-                results = store.similarity_search(query, k=k)
-                all_results.extend(results)
+                docs = retriever.get_relevant_documents(query)
+                all_docs.extend(docs)
             except Exception as e:
-                print(f"[MultiFAISS] Erro ao buscar: {e}")
-        return all_results[:k]
+                print(f"[ERRO] Retriever falhou: {e}")
+        return all_docs[:self.k]
+
+    async def aget_relevant_documents(self, query: str) -> List[Document]:
+        return self.get_relevant_documents(query)
