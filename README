@@ -1,3 +1,13 @@
+ollama show llama3.2
+📊 Especificações principais
+Atributo	Valor
+Parâmetros	3.2 bilhões (3.2B)
+Janela de contexto	131.072 tokens (!)
+Embedding length	3072 tokens
+Quantização	Q4_K_M
+
+
+
 ollama pull mistral
 ollama run mistral
 

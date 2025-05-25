@@ -1,9 +1,18 @@
-Os objetivos estrategicos (objetivos no SIOP) estao em 2023. Não tem o 1144.
-Tem que montar tabelas atualizadas ou criar PDF mais preciso
 
-Na planilha do BI náo tem os objetivos estrategicos
-Tem uma tabela separada com objetivos estrategicos no menu do PPA, mas seu conteudo náo tem nada a ver
+✅ Tem que montar tabelas atualizadas ou criar PDF mais preciso
+✅Fazer checkbox de quais fontes procurar (arquivos FAISS)
+✅ Contar tokens que vao pra llm
 
-Fazer checkbox de quais fontes procurar (arquivos FAISS)
+⚠️ Limites de caracteres na hora de criar chunks tem que ser proporcional ao chunks_size
+⚠️ Certificar-se do uso petencial maximo da gpu
+📝Verificar excesso de reruns
+Separar UI em sidebar e chat
+📌 Cuspir texto aos poucos
 
-Limites de caracteres na hora de criar chunks tem que ser proporcional ao chunks_size
+
+
+👉 Os objetivos estrategicos (objetivos no SIOP) estao em 2023. Não tem o 1144.
+👉 Na planilha do BI náo tem os objetivos estrategicos
+👉 Tem uma tabela separada com objetivos estrategicos no menu do PPA, mas seu conteudo náo tem nada a ver
+👉
+👉
