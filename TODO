@@ -2,12 +2,18 @@
 ✅ Tem que montar tabelas atualizadas ou criar PDF mais preciso
 ✅ Fazer checkbox de quais fontes procurar (arquivos FAISS)
 ✅ Contar tokens que vao pra llm
+✅ Separar UI em sidebar e chat
 
 ⚠️ Limites de caracteres na hora de criar chunks tem que ser proporcional ao chunks_size
-⚠️ Certificar-se do uso petencial maximo da gpu
-📝Verificar excesso de reruns
-Separar UI em sidebar e chat
+
 📌 Cuspir texto aos poucos
+
+📝 Verificar excesso de reruns
+📝 No conversor_pdf.py foram criadas categorias. Será necessário especializar com base nos guias específicos.
+📝 Certificar-se do uso petencial maximo da gpu
+📝 Verfiicar se é o caso de que os objetivos estratégicos estejam todos em um bloco único ou se as devem ser criadas
+ subcategorias como "objetivo estratégico do programa 1144"
+
 
 ⚠️ Cuda não funciona com FAISS no windows. 
     Situação	             Status
@@ -16,12 +22,10 @@ Separar UI em sidebar e chat
     FAISS com CPU (AVX2)	    ✅ Está funcionando
     Soluções	                Use FAISS na CPU ou rode via WSL2 Linux para usar GPU
 
-
 👉 Os objetivos estrategicos (objetivos no SIOP) estao em 2023. Não tem o 1144.
 👉 Na planilha do BI náo tem os objetivos estrategicos
 👉 Tem uma tabela separada com objetivos estrategicos no menu do PPA, mas seu conteudo náo tem nada a ver
 👉 Para criar o jsonl do anexo III será necessária uma fonte confiavel. Cada alteracao no SIOP deve representar modificacao na base de conhecimentos
-👉
 
 
 👉•Ampliar o desenvolvimento da ciência, tecnologia e inovação para o fortalecimento do Sistema Nacional de CT&I, a cooperação Estado-

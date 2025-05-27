@@ -34,3 +34,4 @@ def prompt_editor_ui():
             st.rerun()
 
     st.session_state["prompt_template"] = edited_prompt
+    st.session_state["prompt_selecionado"] = prompt_selecionado

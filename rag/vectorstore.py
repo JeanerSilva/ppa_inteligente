@@ -6,6 +6,7 @@ import time
 import json
 import asyncio
 import streamlit as st
+import logging
 
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import (
@@ -40,6 +41,7 @@ async def load_tokenizer_async(model_name):
     return AutoTokenizer.from_pretrained(model_name)
 
 def create_vectorstore(model_name):
+    logging.info(f"Criando banco de vetores com modelo {model_name}")
     start_time = time.time()
     vectordb_path = get_vectordb_path(model_name)
 
@@ -64,6 +66,7 @@ def create_vectorstore(model_name):
         ext = os.path.splitext(file)[1].lower()
         filename = os.path.basename(file)
         sidebar_progress.markdown(f"📄 Processando: `{filename}`")
+        logging.info(f"Processando {filename}")
 
         try:
             if ext == ".pdf":

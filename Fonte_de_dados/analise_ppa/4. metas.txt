@@ -1,0 +1,9 @@
+[falhas_mensurabilidade] Metas como "melhorar a qualidade de vida" carecem de indicadores específicos e mensuráveis.
+
+[falhas_mensurabilidade] Indicadores genéricos não permitem verificar se houve mudança relevante na situação-problema.
+
+[falhas_mensurabilidade] Metas sem linha de base dificultam a aferição do progresso real durante o ciclo do PPA.
+
+[falhas_mensurabilidade] Um erro comum é usar o mesmo indicador para metas distintas sem explicar sua relevância para cada uma.
+
+[falhas_mensurabilidade] A ausência de metas intermediárias ou marcos temporais impede o acompanhamento progressivo.

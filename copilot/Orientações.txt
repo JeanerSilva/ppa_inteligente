@@ -1,0 +1,73 @@
+Configuração do copilot na Microsoft
+
+✅ 1. Acesse o Portal do Azure
+Entre em: https://portal.azure.com
+
+✅ 2. Registre um novo aplicativo
+Pesquise por "App registrations" (ou "Registros de Aplicativos").
+
+Clique em "New registration".
+
+Preencha:
+
+Name: nome do seu app (ex: CopilotChatApp)
+
+Supported account types: selecione "Accounts in this organizational directory only" (single tenant)
+
+Deixe o campo de redirect URI em branco (não é necessário neste caso).
+
+Clique em "Register".
+
+✅ 3. Obtenha o CLIENT_ID (ID do aplicativo)
+Após o registro:
+
+Vá para a página do aplicativo recém-criado.
+
+Copie o valor de "Application (client) ID" — este é o seu CLIENT_ID.
+
+✅ 4. Obtenha o TENANT_ID
+Na mesma página:
+
+Copie o valor de "Directory (tenant) ID" — este é o seu TENANT_ID.
+
+✅ 5. Crie um CLIENT_SECRET
+Vá até a seção "Certificates & secrets" no menu lateral.
+
+Clique em "New client secret".
+
+Dê um nome (ex: default) e selecione a validade (6 ou 12 meses).
+
+Clique em "Add".
+
+Copie imediatamente o valor gerado em "Value" — esse é o seu CLIENT_SECRET.
+
+⚠️ Importante: você só verá o CLIENT_SECRET uma vez. Salve-o com segurança.
+
+✅ 6. Conceda permissões à API
+Vá até "API permissions".
+
+Clique em "Add a permission".
+
+Selecione:
+
+Microsoft Graph
+
+Tipo: Application permissions
+
+Procure por permissões como Chat.Read.All, Calendars.Read, User.Read.All, etc., conforme seu uso.
+
+Clique em "Add permissions".
+
+Depois, clique em "Grant admin consent" para conceder o acesso para toda a organização.
+
+🔐 Final
+Agora você tem:
+
+Variável	Valor obtido no portal
+CLIENT_ID	Application (client) ID
+TENANT_ID	Directory (tenant) ID
+CLIENT_SECRET	Criado na aba "Certificates & secrets"
+
+Pronto! Você pode agora rodar o script Python que te enviei antes com esses dados.
+
+Se quiser, posso gerar um template .env para armazenar essas variáveis com segurança. Deseja isso também?

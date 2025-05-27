@@ -1,0 +1,18 @@
+git flow feature start feature1
+git flow feature finish feature1
+
+git flow release start v1.0.0
+git flow release finish 'v1.0.0'
+git push origin develop
+git push origin main
+
+#git rm -r --cached __pycache__
+
+
+
+
+pip freeze > installed.txt
+pip uninstall -y -r installed.txt
+del installed.txt  # ou `rm installed.txt` no Linux/macOS
+
+pip install --no-cache-dir -r requirements.txt

@@ -1,0 +1,9 @@
+[objetivos] Os objetivos devem refletir a transformação desejada em resposta ao problema diagnosticado.
+
+[objetivos] Objetivos gerais devem ser amplos, mas conectados logicamente ao diagnóstico e às causas do problema.
+
+[objetivos] Objetivos específicos devem detalhar como se pretende alcançar o objetivo geral, com ações delimitadas e mensuráveis.
+
+[objetivos] Um erro comum é formular objetivos vagos como “melhorar a saúde” sem indicar em que aspecto ou população.
+
+[objetivos] A coerência entre causas e objetivos evita desalinhamentos estratégicos no PPA.

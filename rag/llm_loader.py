@@ -7,14 +7,16 @@ from langchain_ollama import OllamaLLM
 from langchain_openai import ChatOpenAI
 from settings import TEMPERATURE, LLM_MODEL, OPENAI_MODEL,LLM_GGUF
 import streamlit as st
+import logging
 
 load_dotenv()
 openai_key = os.getenv("OPENAI_API_KEY")
 
 @st.cache_resource(show_spinner="🔄 Carregando modelo LLM...")
-def load_llm(modelo_llm: str, temperature=0.0):
+def load_llm(modelo_llm: str, temperature=TEMPERATURE):
 
     assert os.path.exists(LLM_GGUF), "Modelo não encontrado!"
+    logging.info(f"Carrega LLM modelo {LLM_MODEL} temperatura {TEMPERATURE}")
 
     #if modelo_llm == "GGUF (offline)":
     #    return LlamaCpp(
@@ -32,7 +34,8 @@ def load_llm(modelo_llm: str, temperature=0.0):
         return OllamaLLM(
             model=LLM_MODEL,
             base_url=base_url,
-            temperature=TEMPERATURE
+            temperature=TEMPERATURE,
+            stop=["<|start_header_id|>", "<|end_header_id|>", "<|eot_id|>"]
         )
 
     elif modelo_llm == "OpenAI (API)":

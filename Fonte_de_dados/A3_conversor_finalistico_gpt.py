@@ -4,7 +4,7 @@ import json
 import uuid
 import unicodedata
 
-ARQUIVO_PDF = "pdf/normas/anexo-iii-programas-finalisticos.pdf"
+ARQUIVO_PDF = "pdf/programas/anexo-iii-programas-finalisticos.pdf"
 ARQUIVO_JSONL = "chunks/chunks_programas_finalisticos.jsonl"
 
 def normalizar(texto):
@@ -12,7 +12,7 @@ def normalizar(texto):
 
 def criar_chunk(texto, programa_id, categoria):
     return {
-        "text": texto.strip(),
+        "text": f"<|start_header_id|>\n{texto.strip()}\n<|end_header_id|>",
         "metadata": {
             "origem": "programas_finalisticos.pdf",
             "chunk_id": str(uuid.uuid4()),

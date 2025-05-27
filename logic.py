@@ -39,6 +39,7 @@ def process_query(user_input, qa_chain):
     result = qa_chain.invoke({"query": full_query})
     resposta = result["result"]
     fontes = result["source_documents"]
+    #logging.info(f"Geração result {result}, resposta {resposta}, fontes {fontes}")
 
     # Reranker local se ativado
     if st.session_state.get("usar_reranker_debug", False):
@@ -54,11 +55,19 @@ def process_query(user_input, qa_chain):
     st.session_state.chat_history.append(("bot", resposta))
     st.session_state.last_contexts = fontes
 
+    logging.info(f"Metadas do chat {user_input}, resposta {resposta}, fontes {fontes}")
+
+    modelo_llm = st.session_state["modelo_llm"]
+    modelo_embedding=st.session_state["embedding_model"]
+    retriever_k=st.session_state["retriever_k"]
+    timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+    prompt_template =  prompt_template
+    logging.info(f"Dados para chat: modelo_llm {modelo_llm}, modelo_embedding {modelo_embedding}, retriever_k {retriever_k}, prompt template {prompt_template}")
     chat_metadata = {
-        "modelo_llm": st.session_state["modelo_llm"],
-        "modelo_embedding": st.session_state["embedding_model"],
-        "retriever_k": st.session_state["retriever_k"],
-        "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "modelo_llm": modelo_llm,
+        "modelo_embedding": modelo_embedding,
+        "retriever_k": retriever_k,
+        "timestamp":timestamp,
         "prompt_template": prompt_template
     }
 

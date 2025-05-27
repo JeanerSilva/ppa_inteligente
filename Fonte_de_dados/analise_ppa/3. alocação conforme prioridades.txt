@@ -1,0 +1,9 @@
+[priorizacao] Recursos devem ser alocados com base na relevância estratégica das metas para o desenvolvimento nacional.
+
+[priorizacao] É esperado que programas prioritários recebam tratamento orçamentário diferenciado.
+
+[priorizacao] A priorização deve considerar critérios como urgência, impacto social, retorno econômico e viabilidade de curto prazo.
+
+[priorizacao] A sobrecarga orçamentária em ações de baixo impacto pode comprometer a efetividade do PPA.
+
+[priorizacao] A matriz de prioridades ajuda a orientar alocações em contextos de restrição fiscal.

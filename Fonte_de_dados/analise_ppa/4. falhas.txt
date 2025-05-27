@@ -1,0 +1,9 @@
+[erros_comuns] Indicadores vagos como "qualidade da saúde" não permitem acompanhamento técnico.
+
+[erros_comuns] Usar apenas número de atendimentos ou de ações realizadas como medida de sucesso pode mascarar ineficiência.
+
+[erros_comuns] Falta de definição clara de indicadores inviabiliza o monitoramento objetivo do programa.
+
+[erros_comuns] Muitos programas não incluem mecanismo formal de avaliação, tornando impossível medir resultados reais.
+
+[erros_comuns] Indicadores desatualizados ou indisponíveis comprometem a transparência e o controle social.

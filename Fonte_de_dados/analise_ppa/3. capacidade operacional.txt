@@ -1,0 +1,9 @@
+[capacidade_institucional] A execução de um programa depende da estrutura, pessoal e know-how do órgão executor.
+
+[capacidade_institucional] A falta de equipes técnicas, processos e tecnologia limita a execução efetiva, mesmo com orçamento disponível.
+
+[capacidade_institucional] Um bom planejamento deve alinhar o escopo das ações à maturidade da instituição que as executará.
+
+[capacidade_institucional] Novos programas complexos devem prever reforço institucional para garantir viabilidade.
+
+[capacidade_institucional] Indicadores de capacidade de execução, como taxa de empenho e liquidação de anos anteriores, ajudam na avaliação.

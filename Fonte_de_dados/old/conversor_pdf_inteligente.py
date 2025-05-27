@@ -10,7 +10,7 @@ PASTA_PDF = "pdf"
 PASTA_SAIDA = "chunks"
 PASTA_TXT = os.path.join(PASTA_SAIDA, "txt_limpo")
 ARQUIVO_JSONL = os.path.join(PASTA_SAIDA, "chunks_classificados.jsonl")
-LIMITE_CARACTERES = 500
+LIMITE_CARACTERES = 1000
 
 # Modelo LLM via Ollama
 LLM_MODEL = os.getenv("LLM_MODEL", "llama3.2")

@@ -1,0 +1,9 @@
+[monitoramento] O monitoramento deve prever sistemas periódicos de coleta, análise e divulgação de dados de execução física e financeira.
+
+[monitoramento] O PPA deve incluir responsabilidades institucionais claras para o acompanhamento dos indicadores.
+
+[monitoramento] Painéis de controle, relatórios trimestrais e auditorias são instrumentos eficazes de monitoramento governamental.
+
+[monitoramento] Monitoramento efetivo exige integração entre sistemas de informação setoriais e bases orçamentárias.
+
+[monitoramento] Falhas de monitoramento impedem ajustes tempestivos nas políticas públicas.

@@ -1,0 +1,9 @@
+[aderencia_legal] O PPA deve respeitar os princípios do artigo 165 da Constituição Federal, que o define como o plano de médio prazo da administração pública.
+
+[aderencia_legal] A Lei de Responsabilidade Fiscal exige que o planejamento plurianual seja compatível com a realidade fiscal e a capacidade de endividamento do ente público.
+
+[aderencia_legal] O PPA deve ser compatível com a Lei de Diretrizes Orçamentárias (LDO) e com a Lei Orçamentária Anual (LOA).
+
+[aderencia_legal] A ausência de conexão entre o PPA e as leis orçamentárias anuais compromete a execução legal e técnica do plano.
+
+[aderencia_legal] Programas do PPA devem respeitar a legislação setorial aplicável, como marcos regulatórios específicos (ex: saúde, educação, assistência).

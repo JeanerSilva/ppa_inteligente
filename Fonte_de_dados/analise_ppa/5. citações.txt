@@ -1,0 +1,9 @@
+[normas] "Art. 165 da Constituição Federal: Leis de iniciativa do Poder Executivo estabelecerão o plano plurianual, as diretrizes orçamentárias e os orçamentos anuais."
+
+[normas] A Lei Complementar 101/2000 — Lei de Responsabilidade Fiscal — exige que o PPA esteja em conformidade com metas fiscais de médio prazo.
+
+[normas] O Decreto nº 10.950/2022 estabelece diretrizes para elaboração participativa do PPA federal.
+
+[normas] A Lei 13.019/2014 regula a participação de organizações da sociedade civil na formulação de políticas públicas.
+
+[normas] A Lei de Acesso à Informação (Lei 12.527/2011) exige transparência ativa de documentos públicos como o PPA.

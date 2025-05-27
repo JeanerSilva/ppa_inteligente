@@ -1,0 +1,9 @@
+[diagnostico] Um diagnóstico eficaz deve apresentar a situação atual com base em dados quantitativos e qualitativos recentes, identificando a gravidade, abrangência e persistência do problema.
+
+[diagnostico] A ausência de uma linha de base com dados históricos prejudica a formulação de metas realistas no planejamento plurianual.
+
+[diagnostico] O diagnóstico deve considerar desigualdades territoriais, populacionais e setoriais, para garantir políticas direcionadas.
+
+[diagnostico] Indicadores utilizados no diagnóstico devem ter série histórica, fontes confiáveis e permitir comparação entre regiões.
+
+[diagnostico] Problemas estruturais complexos exigem diagnósticos multidimensionais, envolvendo fatores sociais, econômicos e ambientais.

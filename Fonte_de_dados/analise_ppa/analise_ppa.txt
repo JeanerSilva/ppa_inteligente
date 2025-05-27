@@ -1,0 +1,496 @@
+
+--- 1. boas praticas.txt ---
+[boas_praticas] Segundo o Manual Técnico do PPA 2022, metas devem ser formuladas com clareza e conter linha de base, indicador, valor final e prazo.
+
+[boas_praticas] A OCDE recomenda que diagnósticos utilizem dados desagregados para refletir desigualdades regionais e sociais.
+
+[boas_praticas] O TCU destaca que uma causa mal formulada leva à ineficácia do gasto público, mesmo com orçamento adequado.
+
+[boas_praticas] O BID recomenda o uso explícito de teorias da mudança para alinhar planejamento com resultados de longo prazo.
+
+
+--- 1. causas.txt ---
+[causas] A identificação inadequada das causas leva a políticas ineficazes. As causas devem ser específicas, verificáveis e tratáveis.
+
+[causas] Causas bem formuladas devem explicar por que o problema existe, com base em evidências e não apenas em suposições políticas.
+
+[causas] Um erro comum é listar sintomas como se fossem causas. Por exemplo, "alto índice de evasão escolar" é um problema, não uma causa.
+
+[causas] Causas devem ser relacionadas ao contexto institucional, estrutural ou comportamental que sustenta o problema.
+
+[causas] A ausência de mapeamento das causas reais impede o alinhamento eficaz entre diagnóstico, objetivos e ações.
+
+
+--- 1. diagnóstico.txt ---
+[diagnostico] Um diagnóstico eficaz deve apresentar a situação atual com base em dados quantitativos e qualitativos recentes, identificando a gravidade, abrangência e persistência do problema.
+
+[diagnostico] A ausência de uma linha de base com dados históricos prejudica a formulação de metas realistas no planejamento plurianual.
+
+[diagnostico] O diagnóstico deve considerar desigualdades territoriais, populacionais e setoriais, para garantir políticas direcionadas.
+
+[diagnostico] Indicadores utilizados no diagnóstico devem ter série histórica, fontes confiáveis e permitir comparação entre regiões.
+
+[diagnostico] Problemas estruturais complexos exigem diagnósticos multidimensionais, envolvendo fatores sociais, econômicos e ambientais.
+
+
+--- 1. objetivos.txt ---
+[objetivos] Os objetivos devem refletir a transformação desejada em resposta ao problema diagnosticado.
+
+[objetivos] Objetivos gerais devem ser amplos, mas conectados logicamente ao diagnóstico e às causas do problema.
+
+[objetivos] Objetivos específicos devem detalhar como se pretende alcançar o objetivo geral, com ações delimitadas e mensuráveis.
+
+[objetivos] Um erro comum é formular objetivos vagos como “melhorar a saúde” sem indicar em que aspecto ou população.
+
+[objetivos] A coerência entre causas e objetivos evita desalinhamentos estratégicos no PPA.
+
+
+--- 2. articulação.txt ---
+[desconexao] O programa de capacitação profissional não considera os dados de empregabilidade previstos no plano de desenvolvimento regional.
+
+[desconexao] Há metas de aumento da produção agrícola sem articulação com políticas de transporte e escoamento da produção.
+
+[desconexao] Faltam conexões entre o programa de habitação popular e os serviços de saneamento previstos em outro programa.
+
+[desconexao] Ausência de diálogo entre programas de segurança pública e projetos de inclusão social compromete resultados sustentáveis.
+
+[desconexao] Metas de inclusão digital ignoram a infraestrutura elétrica, dificultando a execução em comunidades isoladas.
+
+
+--- 2. coerência.txt ---
+[territorializacao] A concentração de recursos em regiões metropolitanas pode agravar desigualdades territoriais.
+
+[territorializacao] O PPA deve apresentar estratégias diferenciadas para áreas urbanas, rurais, ribeirinhas e indígenas.
+
+[territorializacao] A ausência de dados geográficos nas metas dificulta a avaliação do alcance real dos programas.
+
+[territorializacao] A territorialização adequada permite alinhar políticas públicas às realidades locais, respeitando as diversidades regionais.
+
+[territorializacao] Programas com grande impacto local precisam articular-se com gestões estaduais e municipais.
+
+
+--- 2. erros comuns.txt ---
+[erros_comuns] Repetição de ações em diferentes programas sem distinção de público-alvo ou território.
+
+[erros_comuns] Programas criados de forma isolada, sem considerar a existência de políticas semelhantes em andamento.
+
+[erros_comuns] Falta de previsão de ações conjuntas entre secretarias ou ministérios afins.
+
+[erros_comuns] Indicadores genéricos que não permitem distinguir o impacto entre ações de diferentes programas.
+
+[erros_comuns] Ações de combate à pobreza desvinculadas de programas de educação, saúde e assistência social.
+
+
+--- 2. integração.txt ---
+[integracao_transversal] A ausência de recorte de gênero em metas de saúde reprodutiva pode comprometer o impacto do programa.
+
+[integracao_transversal] Programas de infraestrutura raramente incluem componentes de acessibilidade para pessoas com deficiência.
+
+[integracao_transversal] Faltam indicadores desagregados por raça e etnia nos programas de segurança pública.
+
+[integracao_transversal] Boas práticas recomendam incorporar metas climáticas e de resiliência ambiental em todos os eixos do PPA.
+
+[integracao_transversal] As metas educacionais devem prever ações específicas para comunidades indígenas e quilombolas.
+
+
+--- 2. regulamentação.txt ---
+[boas_praticas] O Manual Técnico do PPA recomenda que programas intersetoriais explicitem as responsabilidades de cada órgão envolvido.
+
+[boas_praticas] A OCDE sugere o uso de matrizes de articulação programática para identificar sinergias e sobreposições entre programas.
+
+[boas_praticas] Programas com ações transversais devem apresentar indicadores desagregados por sexo, raça e território.
+
+[boas_praticas] A integração entre ministérios deve ser formalizada por mecanismos de governança interinstitucional.
+
+[boas_praticas] A territorialização das políticas públicas é uma das principais recomendações do TCU para planos plurianuais.
+
+
+--- 2. sinergia.txt ---
+[sinergia] A articulação entre programas de educação e assistência social pode melhorar o combate à evasão escolar.
+
+[sinergia] A coordenação entre políticas ambientais e agrícolas permite práticas sustentáveis sem comprometer a produtividade.
+
+[sinergia] Integração entre saúde, urbanismo e mobilidade urbana amplia o impacto positivo na qualidade de vida das populações.
+
+[sinergia] Um bom exemplo de sinergia é o alinhamento entre metas de saneamento básico e redução de doenças infecciosas em comunidades vulneráveis.
+
+[sinergia] Programas intersetoriais promovem maior eficiência, especialmente quando operam em territórios compartilhados.
+
+
+--- 2. Sobreposição.txt ---
+[sobreposicao] Dois programas diferentes que preveem a construção de creches na mesma região podem gerar duplicidade de recursos e esforços.
+
+[sobreposicao] Ações voltadas à saúde da mulher são executadas simultaneamente por três ministérios, sem coordenação entre metas ou indicadores.
+
+[sobreposicao] Programas com objetivos similares, mas operados por instituições diferentes, podem gerar conflito de atuação e desperdício orçamentário.
+
+[sobreposicao] A ausência de coordenação entre programas habitacionais federais e estaduais tem levado à duplicação de subsídios em áreas urbanas.
+
+[sobreposicao] Quando metas de inclusão digital são propostas por diferentes ministérios sem padronização, cria-se sobreposição funcional.
+
+
+--- 3. alocação conforme prioridades.txt ---
+[priorizacao] Recursos devem ser alocados com base na relevância estratégica das metas para o desenvolvimento nacional.
+
+[priorizacao] É esperado que programas prioritários recebam tratamento orçamentário diferenciado.
+
+[priorizacao] A priorização deve considerar critérios como urgência, impacto social, retorno econômico e viabilidade de curto prazo.
+
+[priorizacao] A sobrecarga orçamentária em ações de baixo impacto pode comprometer a efetividade do PPA.
+
+[priorizacao] A matriz de prioridades ajuda a orientar alocações em contextos de restrição fiscal.
+
+
+--- 3. alocação.txt ---
+[orcamento] A alocação orçamentária deve ser coerente com a complexidade e o escopo das ações propostas.
+
+[orcamento] Programas com metas ambiciosas exigem orçamentos proporcionais ao esforço necessário para alcançá-las.
+
+[orcamento] Um PPA deve indicar claramente os recursos financeiros previstos por eixo, programa e ano de execução.
+
+[orcamento] É importante explicitar se os recursos são do orçamento fiscal, da seguridade social ou de outras fontes.
+
+[orcamento] A ausência de detalhamento orçamentário dificulta o controle social e a governança do plano.
+
+
+--- 3. capacidade de execução.txt ---
+
+
+--- 3. capacidade operacional.txt ---
+[capacidade_institucional] A execução de um programa depende da estrutura, pessoal e know-how do órgão executor.
+
+[capacidade_institucional] A falta de equipes técnicas, processos e tecnologia limita a execução efetiva, mesmo com orçamento disponível.
+
+[capacidade_institucional] Um bom planejamento deve alinhar o escopo das ações à maturidade da instituição que as executará.
+
+[capacidade_institucional] Novos programas complexos devem prever reforço institucional para garantir viabilidade.
+
+[capacidade_institucional] Indicadores de capacidade de execução, como taxa de empenho e liquidação de anos anteriores, ajudam na avaliação.
+
+
+--- 3. equilíbio.txt ---
+[proporcionalidade] A meta de construir 1.000 creches com apenas R$ 5 milhões em 4 anos indica desproporcionalidade orçamentária.
+
+[proporcionalidade] Programas com baixa abrangência territorial não devem consumir uma fatia desproporcional do orçamento.
+
+[proporcionalidade] O orçamento alocado deve refletir o custo real das ações, com base em estimativas técnicas e experiências anteriores.
+
+[proporcionalidade] A distribuição de recursos deve ser equilibrada entre eixos prioritários e estratégicos.
+
+[proporcionalidade] O custo por unidade de resultado (custo por aluno, por habitação, etc.) é um critério essencial de proporcionalidade.
+
+
+--- 3. erros comuns.txt ---
+[erros_comuns] Alocar recursos para programas com baixa execução histórica sem justificativa técnica.
+
+[erros_comuns] Distribuir orçamento igualmente entre programas de escopos completamente distintos.
+
+[erros_comuns] Propor metas muito ambiciosas com dotação simbólica apenas para marcar presença política.
+
+[erros_comuns] Incluir programas sem qualquer previsão orçamentária, apenas como intenção.
+
+[erros_comuns] Ignorar os limites fiscais e legais da LRF, o que torna o plano inaplicável na prática.
+
+
+--- 3. referências técnicas e normativas.txt ---
+[boas_praticas] O Manual Técnico do PPA recomenda que cada meta esteja vinculada a uma dotação orçamentária estimada.
+
+[boas_praticas] A Lei de Responsabilidade Fiscal exige que planos de médio prazo sejam compatíveis com a sustentabilidade fiscal.
+
+[boas_praticas] O TCU orienta que estimativas orçamentárias sejam feitas com base em estudos técnicos e análise de custos unitários.
+
+[boas_praticas] Boas práticas internacionais sugerem associar metas a indicadores de custo por resultado e não apenas por insumo.
+
+[boas_praticas] A análise de viabilidade deve considerar limites da LOA, teto de gastos e capacidade de execução dos entes federados.
+
+
+--- 4. avaliação de resultados.txt ---
+[avaliacao] A avaliação deve ir além do cumprimento de metas e verificar se os objetivos do programa foram efetivamente alcançados.
+
+[avaliacao] A avaliação de impacto compara a situação de grupos atendidos com grupos controle, isolando o efeito da política.
+
+[avaliacao] Avaliações podem ser processuais (monitorar a execução), ex post (avaliar impacto) ou de sustentabilidade.
+
+[avaliacao] Um bom PPA prevê ciclos de avaliação periódicos que alimentem a tomada de decisão com base em evidências.
+
+[avaliacao] Avaliações bem conduzidas evitam a repetição de programas ineficazes e orientam melhorias contínuas.
+
+
+--- 4. falhas.txt ---
+[erros_comuns] Indicadores vagos como "qualidade da saúde" não permitem acompanhamento técnico.
+
+[erros_comuns] Usar apenas número de atendimentos ou de ações realizadas como medida de sucesso pode mascarar ineficiência.
+
+[erros_comuns] Falta de definição clara de indicadores inviabiliza o monitoramento objetivo do programa.
+
+[erros_comuns] Muitos programas não incluem mecanismo formal de avaliação, tornando impossível medir resultados reais.
+
+[erros_comuns] Indicadores desatualizados ou indisponíveis comprometem a transparência e o controle social.
+
+
+--- 4. guias e normas.txt ---
+[boas_praticas] O Manual Técnico do PPA 2022 recomenda associar cada meta a pelo menos um indicador com fonte e metodologia definidas.
+
+[boas_praticas] A OCDE orienta que sistemas de monitoramento devem gerar dados em tempo real ou com atraso mínimo.
+
+[boas_praticas] O TCU recomenda que avaliações sejam integradas ao ciclo orçamentário e influenciem a alocação futura de recursos.
+
+[boas_praticas] Indicadores de resultado são mais efetivos que indicadores de insumo para avaliar políticas públicas.
+
+[boas_praticas] O uso de avaliação de impacto contrafactual é essencial para programas de larga escala e alto custo.
+
+
+--- 4. indicadores.txt ---
+[indicadores] Indicadores devem ser relevantes, mensuráveis, disponíveis em bases públicas e sensíveis às ações do programa.
+
+[indicadores] Um bom indicador deve refletir diretamente os efeitos ou impactos do programa, e não apenas a realização de atividades.
+
+[indicadores] Indicadores precisam ter série histórica, permitir comparação e serem atualizados periodicamente.
+
+[indicadores] Indicadores qualitativos devem vir acompanhados de critérios objetivos para sua avaliação.
+
+[indicadores] Indicadores desagregados por território, sexo, raça, faixa etária e grupo social tornam as políticas mais precisas e inclusivas.
+
+
+--- 4. metas.txt ---
+[falhas_mensurabilidade] Metas como "melhorar a qualidade de vida" carecem de indicadores específicos e mensuráveis.
+
+[falhas_mensurabilidade] Indicadores genéricos não permitem verificar se houve mudança relevante na situação-problema.
+
+[falhas_mensurabilidade] Metas sem linha de base dificultam a aferição do progresso real durante o ciclo do PPA.
+
+[falhas_mensurabilidade] Um erro comum é usar o mesmo indicador para metas distintas sem explicar sua relevância para cada uma.
+
+[falhas_mensurabilidade] A ausência de metas intermediárias ou marcos temporais impede o acompanhamento progressivo.
+
+
+--- 4. monitoramento.txt ---
+[monitoramento] O monitoramento deve prever sistemas periódicos de coleta, análise e divulgação de dados de execução física e financeira.
+
+[monitoramento] O PPA deve incluir responsabilidades institucionais claras para o acompanhamento dos indicadores.
+
+[monitoramento] Painéis de controle, relatórios trimestrais e auditorias são instrumentos eficazes de monitoramento governamental.
+
+[monitoramento] Monitoramento efetivo exige integração entre sistemas de informação setoriais e bases orçamentárias.
+
+[monitoramento] Falhas de monitoramento impedem ajustes tempestivos nas políticas públicas.
+
+
+--- 5. citações.txt ---
+[normas] "Art. 165 da Constituição Federal: Leis de iniciativa do Poder Executivo estabelecerão o plano plurianual, as diretrizes orçamentárias e os orçamentos anuais."
+
+[normas] A Lei Complementar 101/2000 — Lei de Responsabilidade Fiscal — exige que o PPA esteja em conformidade com metas fiscais de médio prazo.
+
+[normas] O Decreto nº 10.950/2022 estabelece diretrizes para elaboração participativa do PPA federal.
+
+[normas] A Lei 13.019/2014 regula a participação de organizações da sociedade civil na formulação de políticas públicas.
+
+[normas] A Lei de Acesso à Informação (Lei 12.527/2011) exige transparência ativa de documentos públicos como o PPA.
+
+
+--- 5. clareza.txt ---
+[transparencia] O PPA deve ser publicado de forma clara e acessível, com linguagem compreensível para o público geral.
+
+[transparencia] A transparência exige a disponibilização online do plano completo, com seus dados desagregados e atualizáveis.
+
+[transparencia] Um dos critérios de transparência é a publicação dos indicadores e metas em formatos abertos e reutilizáveis.
+
+[transparencia] A opacidade do PPA compromete a fiscalização por parte da sociedade e dos órgãos de controle.
+
+[transparencia] A linguagem técnica excessiva pode dificultar a compreensão e engajamento social com o PPA.
+
+
+--- 5. conformidade.txt ---
+[aderencia_legal] O PPA deve respeitar os princípios do artigo 165 da Constituição Federal, que o define como o plano de médio prazo da administração pública.
+
+[aderencia_legal] A Lei de Responsabilidade Fiscal exige que o planejamento plurianual seja compatível com a realidade fiscal e a capacidade de endividamento do ente público.
+
+[aderencia_legal] O PPA deve ser compatível com a Lei de Diretrizes Orçamentárias (LDO) e com a Lei Orçamentária Anual (LOA).
+
+[aderencia_legal] A ausência de conexão entre o PPA e as leis orçamentárias anuais compromete a execução legal e técnica do plano.
+
+[aderencia_legal] Programas do PPA devem respeitar a legislação setorial aplicável, como marcos regulatórios específicos (ex: saúde, educação, assistência).
+
+
+--- 5. erros.txt ---
+[erros_comuns] Muitos PPAs são elaborados por consultorias técnicas ou setores isolados, sem participação efetiva da sociedade.
+
+[erros_comuns] É comum que os planos sejam publicados apenas em formatos PDF, sem abertura de dados ou acessibilidade.
+
+[erros_comuns] A omissão da LDO como parâmetro de compatibilidade legal gera inconsistência entre plano e orçamento.
+
+[erros_comuns] A falta de relatórios públicos de acompanhamento configura descumprimento do princípio da transparência.
+
+[erros_comuns] A elaboração do PPA sem previsão legal de participação popular viola o princípio da gestão democrática.
+
+
+--- 5. fiscalização.txt ---
+[controle_social] O PPA deve prever instrumentos de controle social, como conselhos, comitês de acompanhamento e portais de transparência.
+
+[controle_social] Conselhos setoriais (saúde, educação, assistência) devem ter acesso e influência sobre o planejamento plurianual.
+
+[controle_social] A atuação da sociedade no controle do PPA fortalece a efetividade e reduz o risco de desvios orçamentários.
+
+[controle_social] Relatórios de execução do PPA devem ser disponibilizados periodicamente ao público, com linguagem acessível.
+
+[controle_social] A ausência de instâncias de controle social compromete a governança democrática do plano.
+
+
+--- 5. guias.txt ---
+[boas_praticas] O Manual Técnico do PPA recomenda a criação de canais digitais para consulta e validação pública do plano.
+
+[boas_praticas] O TCU recomenda que o planejamento plurianual seja acompanhado de relatórios anuais de avaliação e prestação de contas.
+
+[boas_praticas] A OCDE reforça que a participação social é essencial para alinhar o PPA às necessidades reais da população.
+
+[boas_praticas] Boas práticas incluem audiências públicas regionalizadas e escuta de grupos historicamente excluídos.
+
+[boas_praticas] O uso de linguagem cidadã e dashboards interativos facilita o engajamento público com o PPA.
+
+
+--- 5. inclusão social.txt ---
+[participacao_social] A participação popular é um princípio constitucional da administração pública e deve ser garantida na elaboração do PPA.
+
+[participacao_social] Audiências públicas, plataformas digitais e fóruns regionais são mecanismos eficazes de participação social no planejamento.
+
+[participacao_social] Um PPA construído sem escuta da sociedade civil tende a desconsiderar demandas legítimas e prioritárias da população.
+
+[participacao_social] A consulta pública deve ser ampla, acessível e transparente, alcançando diferentes perfis e territórios.
+
+[participacao_social] A institucionalização de conselhos participativos fortalece a legitimidade do PPA.
+
+
+--- analise_ppa.txt ---
+
+--- 1. boas praticas.txt ---
+[boas_praticas] Segundo o Manual Técnico do PPA 2022, metas devem ser formuladas com clareza e conter linha de base, indicador, valor final e prazo.
+
+[boas_praticas] A OCDE recomenda que diagnósticos utilizem dados desagregados para refletir desigualdades regionais e sociais.
+
+[boas_praticas] O TCU destaca que uma causa mal formulada leva à ineficácia do gasto público, mesmo com orçamento adequado.
+
+[boas_praticas] O BID recomenda o uso explícito de teorias da mudança para alinhar planejamento com resultados de longo prazo.
+
+
+--- 1. causas.txt ---
+[causas] A identificação inadequada das causas leva a políticas ineficazes. As causas devem ser específicas, verificáveis e tratáveis.
+
+[causas] Causas bem formuladas devem explicar por que o problema existe, com base em evidências e não apenas em suposições políticas.
+
+[causas] Um erro comum é listar sintomas como se fossem causas. Por exemplo, "alto índice de evasão escolar" é um problema, não uma causa.
+
+[causas] Causas devem ser relacionadas ao contexto institucional, estrutural ou comportamental que sustenta o problema.
+
+[causas] A ausência de mapeamento das causas reais impede o alinhamento eficaz entre diagnóstico, objetivos e ações.
+
+
+--- 1. diagnóstico.txt ---
+[diagnostico] Um diagnóstico eficaz deve apresentar a situação atual com base em dados quantitativos e qualitativos recentes, identificando a gravidade, abrangência e persistência do problema.
+
+[diagnostico] A ausência de uma linha de base com dados históricos prejudica a formulação de metas realistas no planejamento plurianual.
+
+[diagnostico] O diagnóstico deve considerar desigualdades territoriais, populacionais e setoriais, para garantir políticas direcionadas.
+
+[diagnostico] Indicadores utilizados no diagnóstico devem ter série histórica, fontes confiáveis e permitir comparação entre regiões.
+
+[diagnostico] Problemas estruturais complexos exigem diagnósticos multidimensionais, envolvendo fatores sociais, econômicos e ambientais.
+
+
+--- 1. objetivos.txt ---
+[objetivos] Os objetivos devem refletir a transformação desejada em resposta ao problema diagnosticado.
+
+[objetivos] Objetivos gerais devem ser amplos, mas conectados logicamente ao diagnóstico e às causas do problema.
+
+[objetivos] Objetivos específicos devem detalhar como se pretende alcançar o objetivo geral, com ações delimitadas e mensuráveis.
+
+[objetivos] Um erro comum é formular objetivos vagos como “melhorar a saúde” sem indicar em que aspecto ou população.
+
+[objetivos] A coerência entre causas e objetivos evita desalinhamentos estratégicos no PPA.
+
+
+--- 2. articulação.txt ---
+[desconexao] O programa de capacitação profissional não considera os dados de empregabilidade previstos no plano de desenvolvimento regional.
+
+[desconexao] Há metas de aumento da produção agrícola sem articulação com políticas de transporte e escoamento da produção.
+
+[desconexao] Faltam conexões entre o programa de habitação popular e os serviços de saneamento previstos em outro programa.
+
+[desconexao] Ausência de diálogo entre programas de segurança pública e projetos de inclusão social compromete resultados sustentáveis.
+
+[desconexao] Metas de inclusão digital ignoram a infraestrutura elétrica, dificultando a execução em comunidades isoladas.
+
+
+--- 2. coerência.txt ---
+[territorializacao] A concentração de recursos em regiões metropolitanas pode agravar desigualdades territoriais.
+
+[territorializacao] O PPA deve apresentar estratégias diferenciadas para áreas urbanas, rurais, ribeirinhas e indígenas.
+
+[territorializacao] A ausência de dados geográficos nas metas dificulta a avaliação do alcance real dos programas.
+
+[territorializacao] A territorialização adequada permite alinhar políticas públicas às realidades locais, respeitando as diversidades regionais.
+
+[territorializacao] Programas com grande impacto local precisam articular-se com gestões estaduais e municipais.
+
+
+--- 2. erros comuns.txt ---
+[erros_comuns] Repetição de ações em diferentes programas sem distinção de público-alvo ou território.
+
+[erros_comuns] Programas criados de forma isolada, sem considerar a existência de políticas semelhantes em andamento.
+
+[erros_comuns] Falta de previsão de ações conjuntas entre secretarias ou ministérios afins.
+
+[erros_comuns] Indicadores genéricos que não permitem distinguir o impacto entre ações de diferentes programas.
+
+[erros_comuns] Ações de combate à pobreza desvinculadas de programas de educação, saúde e assistência social.
+
+
+--- 2. integração.txt ---
+[integracao_transversal] A ausência de recorte de gênero em metas de saúde reprodutiva pode comprometer o impacto do programa.
+
+[integracao_transversal] Programas de infraestrutura raramente incluem componentes de acessibilidade para pessoas com deficiência.
+
+[integracao_transversal] Faltam indicadores desagregados por raça e etnia nos programas de segurança pública.
+
+[integracao_transversal] Boas práticas recomendam incorporar metas climáticas e de resiliência ambiental em todos os eixos do PPA.
+
+[integracao_transversal] As metas educacionais devem prever ações específicas para comunidades indígenas e quilombolas.
+
+
+--- 2. regulamentação.txt ---
+[boas_praticas] O Manual Técnico do PPA recomenda que programas intersetoriais explicitem as responsabilidades de cada órgão envolvido.
+
+[boas_praticas] A OCDE sugere o uso de matrizes de articulação programática para identificar sinergias e sobreposições entre programas.
+
+[boas_praticas] Programas com ações transversais devem apresentar indicadores desagregados por sexo, raça e território.
+
+[boas_praticas] A integração entre ministérios deve ser formalizada por mecanismos de governança interinstitucional.
+
+[boas_praticas] A territorialização das políticas públicas é uma das principais recomendações do TCU para planos plurianuais.
+
+
+--- 2. sinergia.txt ---
+[sinergia] A articulação entre programas de educação e assistência social pode melhorar o combate à evasão escolar.
+
+[sinergia] A coordenação entre políticas ambientais e agrícolas permite práticas sustentáveis sem comprometer a produtividade.
+
+[sinergia] Integração entre saúde, urbanismo e mobilidade urbana amplia o impacto positivo na qualidade de vida das populações.
+
+[sinergia] Um bom exemplo de sinergia é o alinhamento entre metas de saneamento básico e redução de doenças infecciosas em comunidades vulneráveis.
+
+[sinergia] Programas intersetoriais promovem maior eficiência, especialmente quando operam em territórios compartilhados.
+
+
+--- 2. Sobreposição.txt ---
+[sobreposicao] Dois programas diferentes que preveem a construção de creches na mesma região podem gerar duplicidade de recursos e esforços.
+
+[sobreposicao] Ações voltadas à saúde da mulher são executadas simultaneamente por três ministérios, sem coordenação entre metas ou indicadores.
+
+[sobreposicao] Programas com objetivos similares, mas operados por instituições diferentes, podem gerar conflito de atuação e desperdício orçamentário.
+
+[sobreposicao] A ausência de coordenação entre programas habitacionais federais e estaduais tem levado à duplicação de subsídios em áreas urbanas.
+
+[sobreposicao] Quando metas de inclusão digital são propostas por diferentes ministérios sem padronização, cria-se sobreposição funcional.
+
+
+--- 3. alocação conforme prioridades.txt ---
+

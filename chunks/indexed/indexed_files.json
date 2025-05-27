@@ -1,6 +1,7 @@
 [
-  "anexo_iii-programas_finalisticos.jsonl",
-  "chunks_agendas.jsonl",
-  "chunks_normas.jsonl",
-  "indexed"
+  "indexed",
+  "pdf_chunks-agendas.jsonl",
+  "pdf_chunks-guias.jsonl",
+  "pdf_chunks-normas.jsonl",
+  "programas_agrupados.jsonl"
 ]

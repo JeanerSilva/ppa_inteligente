@@ -1,0 +1,9 @@
+[indicadores] Indicadores devem ser relevantes, mensuráveis, disponíveis em bases públicas e sensíveis às ações do programa.
+
+[indicadores] Um bom indicador deve refletir diretamente os efeitos ou impactos do programa, e não apenas a realização de atividades.
+
+[indicadores] Indicadores precisam ter série histórica, permitir comparação e serem atualizados periodicamente.
+
+[indicadores] Indicadores qualitativos devem vir acompanhados de critérios objetivos para sua avaliação.
+
+[indicadores] Indicadores desagregados por território, sexo, raça, faixa etária e grupo social tornam as políticas mais precisas e inclusivas.

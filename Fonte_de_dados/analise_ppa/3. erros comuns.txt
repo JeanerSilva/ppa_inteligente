@@ -1,0 +1,9 @@
+[erros_comuns] Alocar recursos para programas com baixa execução histórica sem justificativa técnica.
+
+[erros_comuns] Distribuir orçamento igualmente entre programas de escopos completamente distintos.
+
+[erros_comuns] Propor metas muito ambiciosas com dotação simbólica apenas para marcar presença política.
+
+[erros_comuns] Incluir programas sem qualquer previsão orçamentária, apenas como intenção.
+
+[erros_comuns] Ignorar os limites fiscais e legais da LRF, o que torna o plano inaplicável na prática.

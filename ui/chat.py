@@ -9,6 +9,7 @@ from rag.embeddings import load_embeddings
 from logic import process_query
 from multi_faiss import MultiFAISSRetriever
 from historico_embed import render_historico
+import logging
 
 from rag.prompt import get_saved_prompts, save_prompt
 from langchain_community.vectorstores import FAISS
@@ -24,6 +25,8 @@ def render_prompt_editor():
     prompt_names = list(prompts.keys()) or ["default"]
 
     prompt_selecionado = st.selectbox("Escolha um prompt para editar ou criar:", prompt_names + ["<novo>"], key="prompt_selector")
+    logging.info(f"Selecionado prompt {prompt_selecionado} para edição")
+    st.session_state["prompt_selecionado"] = prompt_selecionado
 
     if prompt_selecionado == "<novo>":
         novo_nome = st.text_input("Nome do novo prompt:", key="novo_nome_prompt")
@@ -47,6 +50,7 @@ def render_prompt_editor():
             st.session_state["prompt_template"] = edited_prompt
             st.session_state["prompt_name"] = novo_nome
             st.success(f"Prompt '{novo_nome}' salvo com sucesso!")
+            logging.info(f"Prompt '{novo_nome}' salvo com sucesso!")
 
     st.session_state["prompt_template"] = edited_prompt
 
@@ -68,16 +72,28 @@ def render_chat():
 
     if not vectorstores:
         st.warning("⚠️ Nenhum índice FAISS válido selecionado.")
+        logging.info("⚠️ Nenhum índice FAISS válido selecionado.")
         st.stop()
 
     retrievers = [
         store.as_retriever(search_kwargs={"k": st.session_state["retriever_k"]})
         for store in vectorstores
     ]
-    retriever = MultiFAISSRetriever(retrievers=retrievers, k=st.session_state["retriever_k"])
 
+    k=st.session_state["retriever_k"]
+    retriever = MultiFAISSRetriever(retrievers=retrievers, k=st.session_state["retriever_k"])
+    logging.info(f"retriever usando k {k}")
+    
+    # quando estiver em condições de buscar por categorias
+    #retriever = vectorstore.as_retriever(search_kwargs={
+    #    "k": 8,
+    #    "filter": {"categoria": "artigo"}  # Exemplo: só buscar artigos
+    #})
+
+    prompt_selecionado = st.session_state.get("prompt_selecionado")
     llm = load_llm(modelo_llm, temperature=st.session_state["llm_temperature"])
-    qa_chain = build_qa_chain(retriever, llm, st.session_state.get("prompt_name", "teste"))
+    qa_chain = build_qa_chain(retriever, llm, st.session_state.get("prompt_selecionado"))
+    logging.info(f"promtp_selecionado {prompt_selecionado}")
 
     # Primeiro renderiza o histórico do chat
     for role, msg in st.session_state.chat_history:

@@ -1,0 +1,9 @@
+[boas_praticas] O Manual Técnico do PPA 2022 recomenda associar cada meta a pelo menos um indicador com fonte e metodologia definidas.
+
+[boas_praticas] A OCDE orienta que sistemas de monitoramento devem gerar dados em tempo real ou com atraso mínimo.
+
+[boas_praticas] O TCU recomenda que avaliações sejam integradas ao ciclo orçamentário e influenciem a alocação futura de recursos.
+
+[boas_praticas] Indicadores de resultado são mais efetivos que indicadores de insumo para avaliar políticas públicas.
+
+[boas_praticas] O uso de avaliação de impacto contrafactual é essencial para programas de larga escala e alto custo.

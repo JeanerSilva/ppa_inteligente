@@ -1,0 +1,9 @@
+[erros_comuns] Muitos PPAs são elaborados por consultorias técnicas ou setores isolados, sem participação efetiva da sociedade.
+
+[erros_comuns] É comum que os planos sejam publicados apenas em formatos PDF, sem abertura de dados ou acessibilidade.
+
+[erros_comuns] A omissão da LDO como parâmetro de compatibilidade legal gera inconsistência entre plano e orçamento.
+
+[erros_comuns] A falta de relatórios públicos de acompanhamento configura descumprimento do princípio da transparência.
+
+[erros_comuns] A elaboração do PPA sem previsão legal de participação popular viola o princípio da gestão democrática.

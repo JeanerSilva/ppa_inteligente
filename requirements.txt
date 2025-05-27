@@ -12,17 +12,26 @@ tiktoken
 # Processamento de texto e PDF
 unstructured
 PyPDF2
+pymupdf
 pdfminer.six
 python-docx
 openpyxl
 xlrd
+
+
+#Recall
+sentence-transformers 
+scikit-learn 
+rouge-score
+
+# Imagem
+pillow
 
 # Infraestrutura
 faiss-cpu
 tqdm
 pydantic
 python-dotenv
-tiktoken
 
 # Interface web
 streamlit

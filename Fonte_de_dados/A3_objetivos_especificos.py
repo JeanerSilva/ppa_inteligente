@@ -3,12 +3,12 @@ import re
 import json
 import uuid
 
-ARQUIVO_PDF = "pdf/normas/anexo-iii-programas-finalisticos.pdf"
+ARQUIVO_PDF = "pdf/programas/anexo-iii-programas-finalisticos.pdf"
 ARQUIVO_SAIDA = "chunks/objetivos_especificos.jsonl"
 
 def criar_chunk(texto, programa_id):
     return {
-        "text": texto.strip(),
+        "text": f"<|start_header_id|>\n{texto.strip()}\n<|end_header_id|>",
         "metadata": {
             "chunk_id": str(uuid.uuid4()),
             "categoria": "objetivos_especificos",

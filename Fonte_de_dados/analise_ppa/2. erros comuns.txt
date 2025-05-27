@@ -1,0 +1,9 @@
+[erros_comuns] Repetição de ações em diferentes programas sem distinção de público-alvo ou território.
+
+[erros_comuns] Programas criados de forma isolada, sem considerar a existência de políticas semelhantes em andamento.
+
+[erros_comuns] Falta de previsão de ações conjuntas entre secretarias ou ministérios afins.
+
+[erros_comuns] Indicadores genéricos que não permitem distinguir o impacto entre ações de diferentes programas.
+
+[erros_comuns] Ações de combate à pobreza desvinculadas de programas de educação, saúde e assistência social.

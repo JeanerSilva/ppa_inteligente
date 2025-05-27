@@ -1,0 +1,9 @@
+[boas_praticas] O Manual Técnico do PPA recomenda que cada meta esteja vinculada a uma dotação orçamentária estimada.
+
+[boas_praticas] A Lei de Responsabilidade Fiscal exige que planos de médio prazo sejam compatíveis com a sustentabilidade fiscal.
+
+[boas_praticas] O TCU orienta que estimativas orçamentárias sejam feitas com base em estudos técnicos e análise de custos unitários.
+
+[boas_praticas] Boas práticas internacionais sugerem associar metas a indicadores de custo por resultado e não apenas por insumo.
+
+[boas_praticas] A análise de viabilidade deve considerar limites da LOA, teto de gastos e capacidade de execução dos entes federados.

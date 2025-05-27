@@ -1,0 +1,9 @@
+[boas_praticas] O Manual Técnico do PPA recomenda que programas intersetoriais explicitem as responsabilidades de cada órgão envolvido.
+
+[boas_praticas] A OCDE sugere o uso de matrizes de articulação programática para identificar sinergias e sobreposições entre programas.
+
+[boas_praticas] Programas com ações transversais devem apresentar indicadores desagregados por sexo, raça e território.
+
+[boas_praticas] A integração entre ministérios deve ser formalizada por mecanismos de governança interinstitucional.
+
+[boas_praticas] A territorialização das políticas públicas é uma das principais recomendações do TCU para planos plurianuais.

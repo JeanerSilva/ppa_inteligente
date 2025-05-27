@@ -1,0 +1,9 @@
+[causas] A identificação inadequada das causas leva a políticas ineficazes. As causas devem ser específicas, verificáveis e tratáveis.
+
+[causas] Causas bem formuladas devem explicar por que o problema existe, com base em evidências e não apenas em suposições políticas.
+
+[causas] Um erro comum é listar sintomas como se fossem causas. Por exemplo, "alto índice de evasão escolar" é um problema, não uma causa.
+
+[causas] Causas devem ser relacionadas ao contexto institucional, estrutural ou comportamental que sustenta o problema.
+
+[causas] A ausência de mapeamento das causas reais impede o alinhamento eficaz entre diagnóstico, objetivos e ações.

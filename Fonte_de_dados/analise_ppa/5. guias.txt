@@ -1,0 +1,9 @@
+[boas_praticas] O Manual Técnico do PPA recomenda a criação de canais digitais para consulta e validação pública do plano.
+
+[boas_praticas] O TCU recomenda que o planejamento plurianual seja acompanhado de relatórios anuais de avaliação e prestação de contas.
+
+[boas_praticas] A OCDE reforça que a participação social é essencial para alinhar o PPA às necessidades reais da população.
+
+[boas_praticas] Boas práticas incluem audiências públicas regionalizadas e escuta de grupos historicamente excluídos.
+
+[boas_praticas] O uso de linguagem cidadã e dashboards interativos facilita o engajamento público com o PPA.

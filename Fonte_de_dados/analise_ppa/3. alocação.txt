@@ -1,0 +1,9 @@
+[orcamento] A alocação orçamentária deve ser coerente com a complexidade e o escopo das ações propostas.
+
+[orcamento] Programas com metas ambiciosas exigem orçamentos proporcionais ao esforço necessário para alcançá-las.
+
+[orcamento] Um PPA deve indicar claramente os recursos financeiros previstos por eixo, programa e ano de execução.
+
+[orcamento] É importante explicitar se os recursos são do orçamento fiscal, da seguridade social ou de outras fontes.
+
+[orcamento] A ausência de detalhamento orçamentário dificulta o controle social e a governança do plano.

@@ -11,7 +11,7 @@ def render_sidebar():
     st.session_state["retriever_k"] = st.sidebar.slider(
         label="Número de trechos a considerar:",
         min_value=1,
-        max_value=20,
+        max_value=100,
         value=st.session_state.get("retriever_k", RETRIEVER_TOP_K),
         step=1
     )

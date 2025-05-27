@@ -1,0 +1,7 @@
+[boas_praticas] Segundo o Manual Técnico do PPA 2022, metas devem ser formuladas com clareza e conter linha de base, indicador, valor final e prazo.
+
+[boas_praticas] A OCDE recomenda que diagnósticos utilizem dados desagregados para refletir desigualdades regionais e sociais.
+
+[boas_praticas] O TCU destaca que uma causa mal formulada leva à ineficácia do gasto público, mesmo com orçamento adequado.
+
+[boas_praticas] O BID recomenda o uso explícito de teorias da mudança para alinhar planejamento com resultados de longo prazo.

@@ -1,0 +1,9 @@
+[avaliacao] A avaliação deve ir além do cumprimento de metas e verificar se os objetivos do programa foram efetivamente alcançados.
+
+[avaliacao] A avaliação de impacto compara a situação de grupos atendidos com grupos controle, isolando o efeito da política.
+
+[avaliacao] Avaliações podem ser processuais (monitorar a execução), ex post (avaliar impacto) ou de sustentabilidade.
+
+[avaliacao] Um bom PPA prevê ciclos de avaliação periódicos que alimentem a tomada de decisão com base em evidências.
+
+[avaliacao] Avaliações bem conduzidas evitam a repetição de programas ineficazes e orientam melhorias contínuas.
