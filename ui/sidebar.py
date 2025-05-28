@@ -4,7 +4,7 @@ import os
 import streamlit as st
 from settings import RETRIEVER_TOP_K, EMBEDDING_OPTIONS, TEMPERATURE
 from handlers.file_handler import handle_upload_and_reindex, display_indexed_files
-
+from pathlib import Path
 def render_sidebar():
     st.sidebar.markdown("⚙️ **Configurações**")
 
@@ -33,7 +33,11 @@ def render_sidebar():
     st.session_state["embedding_model"] = embed_model_name
 
     st.sidebar.markdown("📂 **Índices FAISS disponíveis**")
-    base_path = r"C:\SEPLAN\rag_ollama_home\vectors\modelos"
+
+    base_path = f"{Path().resolve()}/vectors/modelos"
+
+    print(f"base_path {base_path}")  # Caminho absoluto resolvido
+    #base_path = r"C:\SEPLAN\rag_ollama_home\vectors\modelos"
     faiss_list = [name for name in os.listdir(base_path) if os.path.isdir(os.path.join(base_path, name))]
     selecionados = st.sidebar.multiselect("Escolha os índices:", faiss_list)
     st.session_state["faiss_selecionados"] = [os.path.join(base_path, nome) for nome in selecionados]
