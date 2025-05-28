@@ -13,6 +13,6 @@ __pycache__/
 *.pyo
 *.pyd
 *.log
-
+.streamlit/secrets.toml
 
 .env
