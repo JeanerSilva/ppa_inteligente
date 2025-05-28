@@ -15,7 +15,7 @@ openai_key = os.getenv("OPENAI_API_KEY")
 @st.cache_resource(show_spinner="🔄 Carregando modelo LLM...")
 def load_llm(modelo_llm: str, temperature=TEMPERATURE):
 
-    assert os.path.exists(LLM_GGUF), "Modelo não encontrado!"
+    #assert os.path.exists(LLM_GGUF), "Modelo não encontrado!"
     logging.info(f"Carrega LLM modelo {LLM_MODEL} temperatura {TEMPERATURE}")
 
     #if modelo_llm == "GGUF (offline)":
