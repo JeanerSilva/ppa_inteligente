@@ -11,7 +11,7 @@ def load_embeddings(model_name: str):
     logging.info(f"Carregando embeddings com modelo {model_name}, device {device} e normalizador {normalize_embeddings}")
     return HuggingFaceEmbeddings(
         model_name=model_name,
-        model_kwargs={"device": device},
+        #model_kwargs={"device": device},
         encode_kwargs={"normalize_embeddings": normalize_embeddings}
     )
 
