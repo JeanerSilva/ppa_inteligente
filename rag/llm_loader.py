@@ -10,7 +10,7 @@ import streamlit as st
 import logging
 
 load_dotenv()
-openai_key = os.getenv("OPENAI_API_KEY")
+openai_key = st.secrets["OPENAI_API_KEY"]
 
 @st.cache_resource(show_spinner="🔄 Carregando modelo LLM...")
 def load_llm(modelo_llm: str, temperature=TEMPERATURE):
