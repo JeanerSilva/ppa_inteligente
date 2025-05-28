@@ -25,7 +25,7 @@ def render_sidebar():
         step=0.1
     )
 
-    modelo_llm = st.sidebar.radio("Modo de execução:", ["Ollama (servidor)", "OpenAI (API)"])
+    modelo_llm = st.sidebar.radio("Modo de execução:", ["OpenAI (API)"], "Ollama (servidor)")
     st.session_state["modelo_llm"] = modelo_llm
 
     embed_model_label = st.sidebar.selectbox("Escolha o modelo:", list(EMBEDDING_OPTIONS.keys()))
